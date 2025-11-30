@@ -1,0 +1,52 @@
+---
+title: 'Bulk Delete Contacts'
+api: 'POST /api/messaging/contacts/bulk-delete/'
+---
+
+Delete multiple contacts at once.
+
+<ParamField body="contact_ids" type="array" required>
+  Array of contact IDs to delete
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "contact_ids": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "550e8400-e29b-41d4-a716-446655440001"
+  ]
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="deleted" type="integer">
+  Number of contacts deleted
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "2 contacts deleted successfully",
+  "deleted": 2
+}
+```
+
+</ResponseExample>
+

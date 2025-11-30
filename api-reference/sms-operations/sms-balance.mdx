@@ -1,0 +1,32 @@
+---
+title: 'Get SMS Balance'
+api: 'GET /api/messaging/sms/balance/'
+---
+
+Get current SMS credit balance.
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="balance" type="object">
+  Balance information
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "balance": {
+    "credits": 1000,
+    "currency": "USD",
+    "last_updated": "2025-11-27T10:30:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

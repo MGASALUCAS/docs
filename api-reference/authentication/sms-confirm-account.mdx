@@ -1,0 +1,55 @@
+---
+title: 'Confirm Account via SMS'
+api: 'POST /api/auth/sms/confirm-account/'
+---
+
+Confirm account activation using SMS verification code.
+
+<ParamField body="verification_code" type="string" required>
+  6-digit verification code
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "verification_code": "123456"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  Confirmed user object
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Account confirmed successfully",
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "is_verified": true,
+    "is_active": true,
+    "phone_verified": true
+  }
+}
+```
+
+</ResponseExample>
+

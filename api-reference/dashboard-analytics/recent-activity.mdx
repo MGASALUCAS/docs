@@ -1,0 +1,47 @@
+---
+title: 'Recent Activity'
+api: 'GET /api/messaging/activity/recent/'
+---
+
+Get recent activity log.
+
+<ParamField query="limit" type="integer">
+  Number of activities to return (default: 20)
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "count": 20,
+  "activities": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "type": "campaign_created",
+      "description": "Created campaign 'Holiday Promotion'",
+      "user": {
+        "id": 1,
+        "email": "user@example.com",
+        "name": "John Doe"
+      },
+      "timestamp": "2025-11-27T10:30:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "type": "sms_sent",
+      "description": "Sent SMS to +255614853618",
+      "user": {
+        "id": 1,
+        "email": "user@example.com",
+        "name": "John Doe"
+      },
+      "timestamp": "2025-11-27T10:25:00Z"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

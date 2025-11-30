@@ -1,0 +1,74 @@
+---
+title: 'Verify Phone Code'
+api: 'POST /api/auth/sms/verify-code/'
+---
+
+Verify phone number using SMS verification code.
+
+<ParamField body="phone_number" type="string" required>
+  Phone number in E.164 format
+</ParamField>
+
+<ParamField body="verification_code" type="string" required>
+  6-digit verification code
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "phone_number": "+255614853618",
+  "verification_code": "123456"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="phone_number" type="string">
+  Verified phone number
+</ResponseField>
+
+<ResponseField name="phone_verified" type="boolean">
+  Phone verification status
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Phone number verified successfully",
+  "phone_number": "+255614853618",
+  "phone_verified": true
+}
+```
+
+</ResponseExample>
+
+## Error Response (400)
+
+<ResponseExample>
+
+```json
+{
+  "success": false,
+  "error": "Invalid verification code",
+  "message": "The verification code provided is incorrect or expired",
+  "attempts_remaining": 2
+}
+```
+
+</ResponseExample>
+

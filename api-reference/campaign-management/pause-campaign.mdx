@@ -1,0 +1,40 @@
+---
+title: 'Pause Campaign'
+api: 'POST /api/messaging/campaigns/{campaign_id}/pause/'
+---
+
+Pause a running campaign.
+
+<ParamField path="campaign_id" type="string" required>
+  Campaign ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="campaign" type="object">
+  Updated campaign object
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Campaign paused successfully",
+  "campaign": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "status": "paused"
+  }
+}
+```
+
+</ResponseExample>
+

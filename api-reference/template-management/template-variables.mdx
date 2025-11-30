@@ -1,0 +1,39 @@
+---
+title: 'Get Template Variables'
+api: 'GET /api/messaging/templates/{template_id}/variables/'
+---
+
+Get list of variables used in a template.
+
+<ParamField path="template_id" type="string" required>
+  Template ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="template_id" type="string">
+  Template ID
+</ResponseField>
+
+<ResponseField name="variables" type="array">
+  Array of variable objects
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "template_id": "550e8400-e29b-41d4-a716-446655440000",
+  "variables": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Customer name"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

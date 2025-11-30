@@ -1,0 +1,59 @@
+---
+title: 'SMS Verification'
+api: 'POST /api/auth/sms/send-code/'
+---
+
+Send SMS verification code to phone number.
+
+<ParamField body="phone_number" type="string" required>
+  Phone number in E.164 format
+</ParamField>
+
+<ParamField body="message_type" type="string">
+  Type of message (default: verification)
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "phone_number": "+255614853618",
+  "message_type": "verification"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="phone_number" type="string">
+  Phone number the code was sent to
+</ResponseField>
+
+<ResponseField name="message_id" type="string">
+  SMS message ID
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Verification code sent successfully",
+  "phone_number": "+255614853618",
+  "message_id": "msg_1234567890"
+}
+```
+
+</ResponseExample>
+

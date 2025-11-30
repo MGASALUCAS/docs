@@ -1,0 +1,42 @@
+---
+title: 'Get SMS Delivery Status'
+api: 'GET /api/messaging/sms/{message_id}/status/'
+---
+
+Get delivery status of a specific SMS message.
+
+<ParamField path="message_id" type="string" required>
+  SMS message ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="object">
+  Message details with status
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "recipient": "+255614853618",
+    "message": "Hello, this is a test message",
+    "sender_id": "MIFUMO",
+    "status": "delivered",
+    "sent_at": "2025-11-27T10:30:00Z",
+    "delivered_at": "2025-11-27T10:30:15Z",
+    "cost": 0.05,
+    "currency": "USD"
+  }
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,108 @@
+---
+title: 'Error Handling'
+description: 'Standard error response formats and HTTP status codes'
+---
+
+## Standard Error Response Format
+
+All error responses follow this format:
+
+<ResponseExample>
+
+```json
+{
+  "error": "Error type",
+  "message": "Human-readable error message",
+  "details": {
+    "field_name": ["Error message for this field"]
+  }
+}
+```
+
+</ResponseExample>
+
+## HTTP Status Codes
+
+- **200 OK**: Request successful
+- **201 Created**: Resource created successfully
+- **204 No Content**: Request successful, no content to return
+- **400 Bad Request**: Invalid request data
+- **401 Unauthorized**: Authentication required
+- **403 Forbidden**: Insufficient permissions
+- **404 Not Found**: Resource not found
+- **402 Payment Required**: Insufficient credits/balance
+- **429 Too Many Requests**: Rate limit exceeded
+- **500 Internal Server Error**: Server error
+
+## Common Error Responses
+
+### 401 Unauthorized
+
+<ResponseExample>
+
+```json
+{
+  "detail": "Authentication credentials were not provided."
+}
+```
+
+</ResponseExample>
+
+### 403 Forbidden
+
+<ResponseExample>
+
+```json
+{
+  "detail": "You do not have permission to perform this action."
+}
+```
+
+</ResponseExample>
+
+### 404 Not Found
+
+<ResponseExample>
+
+```json
+{
+  "error": "Not found",
+  "message": "The requested resource was not found."
+}
+```
+
+</ResponseExample>
+
+### 400 Validation Error
+
+<ResponseExample>
+
+```json
+{
+  "field_name": [
+    "This field is required.",
+    "This field may not be blank."
+  ],
+  "another_field": [
+    "Invalid value."
+  ]
+}
+```
+
+</ResponseExample>
+
+### 402 Payment Required
+
+<ResponseExample>
+
+```json
+{
+  "error": "Insufficient credits",
+  "message": "You need 10 credits to perform this action. Current balance: 5 credits",
+  "required_credits": 10,
+  "current_balance": 5
+}
+```
+
+</ResponseExample>
+

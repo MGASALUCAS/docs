@@ -1,0 +1,37 @@
+---
+title: 'Contact Opt-In'
+api: 'POST /api/messaging/contacts/{contact_id}/opt-in/'
+---
+
+Opt a contact back in to receive messages.
+
+<ParamField path="contact_id" type="string" required>
+  Contact ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="opt_in_at" type="string">
+  Timestamp of opt-in
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Contact opted in successfully",
+  "opt_in_at": "2025-11-27T10:30:00Z"
+}
+```
+
+</ResponseExample>
+

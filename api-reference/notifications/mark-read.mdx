@@ -1,0 +1,28 @@
+---
+title: 'Mark Notification as Read'
+api: 'POST /api/notifications/{notification_id}/mark-read/'
+---
+
+Mark a specific notification as read.
+
+<ParamField path="notification_id" type="string" required>
+  Notification ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Notification marked as read",
+  "notification": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "is_read": true
+  }
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,36 @@
+---
+title: 'Get Campaign Analytics'
+api: 'GET /api/messaging/campaigns/{campaign_id}/analytics/'
+---
+
+Get detailed analytics for a campaign.
+
+<ParamField path="campaign_id" type="string" required>
+  Campaign ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "campaign_id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Holiday Promotion",
+  "status": "completed",
+  "total_recipients": 1000,
+  "sent": 1000,
+  "delivered": 950,
+  "failed": 50,
+  "delivery_rate": 95.0,
+  "cost": 50.00,
+  "currency": "USD",
+  "started_at": "2025-12-01T10:00:00Z",
+  "completed_at": "2025-12-01T10:30:00Z",
+  "duration_seconds": 1800,
+  "messages_per_second": 0.56
+}
+```
+
+</ResponseExample>
+

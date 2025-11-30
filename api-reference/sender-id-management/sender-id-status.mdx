@@ -1,0 +1,27 @@
+---
+title: 'Get Sender ID Status'
+api: 'GET /api/messaging/sender-ids/{sender_id}/status/'
+---
+
+Get approval status of a sender ID.
+
+<ParamField path="sender_id" type="string" required>
+  Sender ID ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "sender_id": "MYBIZ",
+  "status": "approved",
+  "approved_at": "2025-11-28T10:00:00Z",
+  "is_default": false
+}
+```
+
+</ResponseExample>
+

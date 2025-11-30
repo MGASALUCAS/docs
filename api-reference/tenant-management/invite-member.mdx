@@ -1,0 +1,52 @@
+---
+title: 'Invite Team Member'
+api: 'POST /api/tenants/{tenant_id}/team/invite/'
+---
+
+Invite a new team member to the tenant.
+
+<ParamField path="tenant_id" type="string" required>
+  Tenant ID
+</ParamField>
+
+<ParamField body="email" type="string" required>
+  Email address of the user to invite
+</ParamField>
+
+<ParamField body="role" type="string" required>
+  Role to assign (e.g., member, admin)
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "email": "newmember@example.com",
+  "role": "member"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Invitation sent successfully",
+  "invitation": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "email": "newmember@example.com",
+    "role": "member",
+    "status": "pending",
+    "sent_at": "2025-11-27T10:30:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,37 @@
+---
+title: 'Toggle Template Favorite'
+api: 'POST /api/messaging/templates/{template_id}/toggle-favorite/'
+---
+
+Toggle favorite status of a template.
+
+<ParamField path="template_id" type="string" required>
+  Template ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="is_favorite" type="boolean">
+  Current favorite status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "is_favorite": true,
+  "message": "Template favorited"
+}
+```
+
+</ResponseExample>
+

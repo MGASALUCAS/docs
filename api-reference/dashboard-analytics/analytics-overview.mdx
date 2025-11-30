@@ -1,0 +1,51 @@
+---
+title: 'Analytics Overview'
+api: 'GET /api/messaging/analytics/overview/'
+---
+
+Get comprehensive analytics overview for a date range.
+
+<ParamField query="start_date" type="date">
+  Start date (YYYY-MM-DD)
+</ParamField>
+
+<ParamField query="end_date" type="date">
+  End date (YYYY-MM-DD)
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "period": {
+    "start": "2025-11-01T00:00:00Z",
+    "end": "2025-11-27T23:59:59Z"
+  },
+  "overview": {
+    "total_messages": 10000,
+    "delivered": 9500,
+    "failed": 500,
+    "delivery_rate": 95.0,
+    "total_cost": 500.00,
+    "average_cost_per_message": 0.05
+  },
+  "by_status": {
+    "sent": 10000,
+    "delivered": 9500,
+    "failed": 500
+  },
+  "by_day": [
+    {
+      "date": "2025-11-01",
+      "sent": 500,
+      "delivered": 475,
+      "failed": 25
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

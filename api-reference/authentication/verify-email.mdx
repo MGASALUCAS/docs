@@ -1,0 +1,59 @@
+---
+title: 'Verify Email (POST)'
+api: 'POST /api/auth/verify-email/'
+---
+
+Verify email address using verification code.
+
+<ParamField body="token" type="string" required>
+  6-digit verification code
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "token": "123456"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  Verified user object
+</ResponseField>
+
+<ResponseField name="tokens" type="object">
+  Access and refresh tokens
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Account activated successfully",
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_verified": true,
+    "is_active": true
+  },
+  "tokens": {
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+  }
+}
+```
+
+</ResponseExample>
+

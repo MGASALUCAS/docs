@@ -1,0 +1,41 @@
+---
+title: 'Duplicate Campaign'
+api: 'POST /api/messaging/campaigns/{campaign_id}/duplicate/'
+---
+
+Create a copy of an existing campaign.
+
+<ParamField path="campaign_id" type="string" required>
+  Campaign ID to duplicate
+</ParamField>
+
+## Success Response (201)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="new_campaign" type="object">
+  Newly created campaign object
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Campaign duplicated successfully",
+  "new_campaign": {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "name": "Holiday Promotion (Copy)",
+    "status": "draft"
+  }
+}
+```
+
+</ResponseExample>
+

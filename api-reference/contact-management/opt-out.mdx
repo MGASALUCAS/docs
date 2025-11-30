@@ -1,0 +1,53 @@
+---
+title: 'Contact Opt-Out'
+api: 'POST /api/messaging/contacts/{contact_id}/opt-out/'
+---
+
+Opt a contact out of receiving messages.
+
+<ParamField path="contact_id" type="string" required>
+  Contact ID
+</ParamField>
+
+<ParamField body="reason" type="string">
+  Reason for opting out
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "reason": "No longer interested"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="opt_out_at" type="string">
+  Timestamp of opt-out
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Contact opted out successfully",
+  "opt_out_at": "2025-11-27T10:30:00Z"
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,52 @@
+---
+title: 'Switch Tenant'
+api: 'POST /api/tenants/switch/'
+---
+
+Switch to a different tenant (organization).
+
+<ParamField body="tenant_id" type="string" required>
+  Tenant ID to switch to
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "tenant_id": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="tenant" type="object">
+  Switched tenant object
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Tenant switched successfully",
+  "tenant": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "My Organization"
+  }
+}
+```
+
+</ResponseExample>
+

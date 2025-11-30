@@ -1,0 +1,33 @@
+---
+title: 'Mark All as Read'
+api: 'POST /api/notifications/mark-all-read/'
+---
+
+Mark all notifications as read.
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="marked" type="integer">
+  Number of notifications marked as read
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "All notifications marked as read",
+  "marked": 10
+}
+```
+
+</ResponseExample>
+

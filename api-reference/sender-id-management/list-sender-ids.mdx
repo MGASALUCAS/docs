@@ -1,0 +1,35 @@
+---
+title: 'List Sender IDs'
+api: 'GET /api/messaging/sender-ids/'
+---
+
+List all sender IDs for the current tenant.
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "count": 3,
+  "results": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "sender_id": "MIFUMO",
+      "status": "approved",
+      "is_default": true,
+      "created_at": "2025-11-01T10:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "sender_id": "MYBIZ",
+      "status": "pending",
+      "is_default": false,
+      "created_at": "2025-11-27T10:00:00Z"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,68 @@
+---
+title: 'List Contacts'
+api: 'GET /api/messaging/contacts/'
+---
+
+List all contacts with pagination and filtering.
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+<ParamField query="page_size" type="integer">
+  Items per page (default: 20, max: 100)
+</ParamField>
+
+<ParamField query="search" type="string">
+  Search term
+</ParamField>
+
+<ParamField query="tags" type="string">
+  Filter by tags (comma-separated)
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="count" type="integer">
+  Total number of contacts
+</ResponseField>
+
+<ResponseField name="next" type="string">
+  URL to next page (nullable)
+</ResponseField>
+
+<ResponseField name="previous" type="string">
+  URL to previous page (nullable)
+</ResponseField>
+
+<ResponseField name="results" type="array">
+  Array of contact objects
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "count": 150,
+  "next": "https://mifumosms.mifumolabs.com/api/messaging/contacts/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "John Doe",
+      "phone_e164": "+255614853618",
+      "email": "john@example.com",
+      "attributes": {},
+      "tags": ["VIP", "Customer"],
+      "is_active": true,
+      "opt_in_at": "2025-11-01T10:00:00Z",
+      "opt_out_at": null,
+      "created_at": "2025-11-01T10:00:00Z",
+      "updated_at": "2025-11-27T10:30:00Z"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

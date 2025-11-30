@@ -1,0 +1,27 @@
+---
+title: 'Get SMS Balance'
+api: 'GET /api/billing/sms/balance/'
+---
+
+Get current SMS balance and usage information.
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "balance": {
+    "credits": 1000,
+    "currency": "USD",
+    "last_updated": "2025-11-27T10:30:00Z"
+  },
+  "usage": {
+    "used_this_month": 500,
+    "remaining": 500
+  }
+}
+```
+
+</ResponseExample>
+

@@ -1,0 +1,41 @@
+---
+title: 'Start Campaign'
+api: 'POST /api/messaging/campaigns/{campaign_id}/start/'
+---
+
+Start a scheduled or paused campaign.
+
+<ParamField path="campaign_id" type="string" required>
+  Campaign ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="campaign" type="object">
+  Updated campaign object
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Campaign started successfully",
+  "campaign": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "status": "running",
+    "started_at": "2025-11-27T10:30:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

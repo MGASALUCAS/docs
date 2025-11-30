@@ -1,0 +1,64 @@
+---
+title: 'Bulk Import Contacts'
+api: 'POST /api/messaging/contacts/bulk-import/'
+---
+
+Import multiple contacts from a CSV or Excel file.
+
+<ParamField body="file" type="file" required>
+  CSV or Excel file containing contacts
+</ParamField>
+
+<ParamField body="tags" type="string">
+  Comma-separated tags to apply to all imported contacts
+</ParamField>
+
+## Request Example
+
+Form data with file upload:
+```
+file: [CSV/Excel file]
+tags: "VIP,Customer"
+```
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="imported" type="integer">
+  Number of contacts imported successfully
+</ResponseField>
+
+<ResponseField name="failed" type="integer">
+  Number of contacts that failed to import
+</ResponseField>
+
+<ResponseField name="errors" type="array">
+  Array of error objects
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Contacts imported successfully",
+  "imported": 100,
+  "failed": 5,
+  "errors": [
+    {
+      "row": 3,
+      "error": "Invalid phone number format"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

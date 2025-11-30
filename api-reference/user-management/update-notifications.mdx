@@ -1,0 +1,54 @@
+---
+title: 'Update Notification Settings'
+api: 'PUT /api/auth/settings/notifications/'
+---
+
+Update user notification preferences.
+
+<ParamField body="email_notifications" type="boolean">
+  Enable/disable email notifications
+</ParamField>
+
+<ParamField body="sms_notifications" type="boolean">
+  Enable/disable SMS notifications
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "email_notifications": true,
+  "sms_notifications": false
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="email_notifications" type="boolean">
+  Email notifications status
+</ResponseField>
+
+<ResponseField name="sms_notifications" type="boolean">
+  SMS notifications status
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Notification settings updated successfully",
+  "email_notifications": true,
+  "sms_notifications": false
+}
+```
+
+</ResponseExample>
+

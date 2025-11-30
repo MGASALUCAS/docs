@@ -1,0 +1,90 @@
+---
+title: 'Get User Profile'
+api: 'GET /api/auth/profile/'
+---
+
+Get current user's profile information.
+
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
+## Success Response (200)
+
+<ResponseField name="id" type="integer">
+  User ID
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  User email address
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  User's first name
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  User's last name
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  User's full name
+</ResponseField>
+
+<ResponseField name="short_name" type="string">
+  User's short name
+</ResponseField>
+
+<ResponseField name="phone_number" type="string">
+  User's phone number
+</ResponseField>
+
+<ResponseField name="timezone" type="string">
+  User's timezone
+</ResponseField>
+
+<ResponseField name="avatar" type="string">
+  Avatar URL (nullable)
+</ResponseField>
+
+<ResponseField name="bio" type="string">
+  User bio
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Email verification status
+</ResponseField>
+
+<ResponseField name="email_notifications" type="boolean">
+  Email notifications enabled
+</ResponseField>
+
+<ResponseField name="sms_notifications" type="boolean">
+  SMS notifications enabled
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "id": 1,
+  "email": "user@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "full_name": "John Doe",
+  "short_name": "John",
+  "phone_number": "+255614853618",
+  "timezone": "Africa/Dar_es_Salaam",
+  "avatar": null,
+  "bio": "",
+  "is_verified": true,
+  "email_notifications": true,
+  "sms_notifications": false,
+  "created_at": "2025-11-27T10:30:00Z",
+  "updated_at": "2025-11-27T10:30:00Z",
+  "last_login_at": "2025-11-27T10:30:00Z"
+}
+```
+
+</ResponseExample>
+

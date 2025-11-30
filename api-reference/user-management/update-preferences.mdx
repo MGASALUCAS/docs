@@ -1,0 +1,44 @@
+---
+title: 'Update Preferences'
+api: 'PUT /api/auth/settings/preferences/'
+---
+
+Update user preferences.
+
+<ParamField body="timezone" type="string">
+  User timezone
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "timezone": "Africa/Dar_es_Salaam"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="timezone" type="string">
+  Updated timezone
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Preferences updated successfully",
+  "timezone": "Africa/Dar_es_Salaam"
+}
+```
+
+</ResponseExample>
+

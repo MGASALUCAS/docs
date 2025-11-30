@@ -1,0 +1,34 @@
+---
+title: 'Dashboard Overview'
+api: 'GET /api/messaging/dashboard/overview/'
+---
+
+Get dashboard overview statistics and recent activity.
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "stats": {
+    "total_contacts": 1500,
+    "total_campaigns": 25,
+    "total_messages_sent": 10000,
+    "total_messages_delivered": 9500,
+    "delivery_rate": 95.0,
+    "total_spent": 500.00,
+    "current_balance": 1000.00
+  },
+  "recent_activity": [
+    {
+      "type": "campaign_completed",
+      "message": "Holiday Promotion campaign completed",
+      "timestamp": "2025-11-27T10:30:00Z"
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

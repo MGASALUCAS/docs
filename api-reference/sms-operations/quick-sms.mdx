@@ -1,0 +1,72 @@
+---
+title: 'Quick SMS Send'
+api: 'POST /api/messaging/sms/quick/'
+---
+
+Send SMS to multiple recipients quickly.
+
+<ParamField body="recipients" type="array" required>
+  Array of recipient phone numbers
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  SMS message content
+</ParamField>
+
+<ParamField body="sender_id" type="string" required>
+  Sender ID
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "recipients": ["+255614853618", "+255712345678"],
+  "message": "Hello, this is a quick message",
+  "sender_id": "MIFUMO"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="sent" type="integer">
+  Number of messages sent successfully
+</ResponseField>
+
+<ResponseField name="failed" type="integer">
+  Number of messages that failed
+</ResponseField>
+
+<ResponseField name="message_ids" type="array">
+  Array of message IDs
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "SMS sent to 2 recipients",
+  "sent": 2,
+  "failed": 0,
+  "message_ids": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "550e8400-e29b-41d4-a716-446655440001"
+  ]
+}
+```
+
+</ResponseExample>
+

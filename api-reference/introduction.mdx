@@ -1,33 +1,77 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Mifumo SMS API - Complete Frontend API Documentation'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+This is a comprehensive API documentation for frontend developers. It includes all endpoints with complete JSON request/response examples.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+**Base URL:** `https://mifumosms.mifumolabs.com/api/`
+**API Version:** 1.0
+**Authentication:** JWT Bearer Token
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Quick Start
 
-## Authentication
+All API endpoints require authentication using JWT Bearer tokens. Include the access token in the Authorization header:
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
 ```
+Authorization: Bearer {access_token}
+```
+
+The access token is obtained from the [Login endpoint](/api-reference/authentication/login).
+
+## API Structure
+
+The API is organized into the following sections:
+
+- [Authentication](/api-reference/authentication/register) - User registration, login, and account management
+- [User Management](/api-reference/user-management/profile) - Profile and settings management
+- [SMS Operations](/api-reference/sms-operations/send-sms) - Send SMS, check balance, and delivery status
+- [Contact Management](/api-reference/contact-management/list-contacts) - Manage contacts and lists
+- [Campaign Management](/api-reference/campaign-management/list-campaigns) - Create and manage SMS campaigns
+- [Template Management](/api-reference/template-management/list-templates) - SMS message templates
+- [Billing & Payments](/api-reference/billing-payments/sms-packages) - Purchase SMS packages and manage payments
+- [Tenant Management](/api-reference/tenant-management/list-tenants) - Multi-tenant organization management
+- [Notifications](/api-reference/notifications/list-notifications) - System notifications
+- [Sender ID Management](/api-reference/sender-id-management/list-sender-ids) - Manage sender IDs
+- [Dashboard & Analytics](/api-reference/dashboard-analytics/overview) - Analytics and reporting
+
+## Rate Limiting
+
+API requests are rate-limited to prevent abuse:
+- **Authenticated requests**: 1000 requests per hour
+- **Unauthenticated requests**: 100 requests per hour
+
+Rate limit headers are included in responses:
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1638000000
+```
+
+## Pagination
+
+List endpoints support pagination with the following query parameters:
+- `page` (integer): Page number (default: 1)
+- `page_size` (integer): Items per page (default: 20, max: 100)
+
+## Date Formats
+
+All dates are returned in ISO 8601 format: `2025-11-27T10:30:00Z`
+
+## Phone Number Format
+
+Phone numbers should be in E.164 format:
+- ✅ Correct: `+255614853618`
+- ❌ Incorrect: `0614853618`, `255614853618`
+
+## Support
+
+For API support, contact:
+- **Email**: api@mifumo.com
+- **Documentation**: https://docs.mifumo.com
+- **Status Page**: https://status.mifumo.com
+
+**Last Updated**: November 2025
+**API Version**: 1.0

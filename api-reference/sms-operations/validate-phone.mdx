@@ -1,0 +1,59 @@
+---
+title: 'Validate Phone Number'
+api: 'POST /api/messaging/sms/validate-phone/'
+---
+
+Validate and format a phone number.
+
+<ParamField body="phone_number" type="string" required>
+  Phone number to validate
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "phone_number": "+255614853618"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="valid" type="boolean">
+  Whether phone number is valid
+</ResponseField>
+
+<ResponseField name="formatted" type="string">
+  Formatted phone number in E.164 format
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country name
+</ResponseField>
+
+<ResponseField name="country_code" type="string">
+  Country code
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "valid": true,
+  "formatted": "+255614853618",
+  "country": "Tanzania",
+  "country_code": "TZ"
+}
+```
+
+</ResponseExample>
+

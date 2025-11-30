@@ -1,0 +1,39 @@
+---
+title: 'Get SMS Stats'
+api: 'GET /api/messaging/sms/stats/'
+---
+
+Get SMS statistics for the current period.
+
+## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="stats" type="object">
+  Statistics data
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "stats": {
+    "total_sent": 1500,
+    "total_delivered": 1450,
+    "total_failed": 50,
+    "delivery_rate": 96.67,
+    "total_cost": 75.00,
+    "currency": "USD",
+    "period": {
+      "start": "2025-11-01T00:00:00Z",
+      "end": "2025-11-27T23:59:59Z"
+    }
+  }
+}
+```
+
+</ResponseExample>
+

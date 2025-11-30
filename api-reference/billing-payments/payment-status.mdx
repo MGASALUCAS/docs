@@ -1,0 +1,31 @@
+---
+title: 'Check Payment Status'
+api: 'GET /api/billing/payments/transactions/{transaction_id}/status/'
+---
+
+Check the status of a payment transaction.
+
+<ParamField path="transaction_id" type="string" required>
+  Transaction ID
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "transaction": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "order_id": "ORD-1234567890",
+    "amount": 50.00,
+    "currency": "USD",
+    "status": "completed",
+    "completed_at": "2025-11-27T10:35:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

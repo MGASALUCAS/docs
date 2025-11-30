@@ -1,0 +1,39 @@
+---
+title: 'Dashboard Metrics'
+api: 'GET /api/messaging/dashboard/metrics/'
+---
+
+Get detailed metrics for a specific time period.
+
+<ParamField query="period" type="string">
+  Time period (7d, 30d, 90d, 1y)
+</ParamField>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "period": "30d",
+  "metrics": {
+    "messages_sent": 5000,
+    "messages_delivered": 4750,
+    "delivery_rate": 95.0,
+    "cost": 250.00,
+    "contacts_added": 150,
+    "campaigns_created": 5
+  },
+  "daily_breakdown": [
+    {
+      "date": "2025-11-01",
+      "sent": 200,
+      "delivered": 190,
+      "cost": 10.00
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

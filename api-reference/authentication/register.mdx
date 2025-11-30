@@ -1,0 +1,148 @@
+---
+title: 'Register User'
+api: 'POST /api/auth/register/'
+---
+
+Register a new user account.
+
+<ParamField body="email" type="string" required>
+  User email address
+</ParamField>
+
+<ParamField body="first_name" type="string" required>
+  User's first name
+</ParamField>
+
+<ParamField body="last_name" type="string" required>
+  User's last name
+</ParamField>
+
+<ParamField body="phone_number" type="string" required>
+  Phone number in E.164 format (e.g., +255614853618)
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  User password
+</ParamField>
+
+<ParamField body="password_confirm" type="string" required>
+  Password confirmation (must match password)
+</ParamField>
+
+<ParamField body="timezone" type="string">
+  User timezone (default: Africa/Dar_es_Salaam)
+</ParamField>
+
+<ParamField body="business_name" type="string">
+  Business name
+</ParamField>
+
+<ParamField body="company_name" type="string">
+  Company name
+</ParamField>
+
+<ParamField body="subdomain" type="string">
+  Organization subdomain
+</ParamField>
+
+<ParamField body="country" type="string">
+  Country name
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "email": "user@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "phone_number": "+255614853618",
+  "password": "SecurePassword123!",
+  "password_confirm": "SecurePassword123!",
+  "timezone": "Africa/Dar_es_Salaam",
+  "business_name": "My Business",
+  "company_name": "My Company",
+  "subdomain": "mybusiness",
+  "country": "Tanzania"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  User object with account details
+</ResponseField>
+
+<ResponseField name="email_verification_sent" type="boolean">
+  Whether email verification was sent
+</ResponseField>
+
+<ResponseField name="sms_verification_sent" type="boolean">
+  Whether SMS verification was sent
+</ResponseField>
+
+<ResponseField name="account_active" type="boolean">
+  Whether account is active
+</ResponseField>
+
+<ResponseField name="requires_activation" type="boolean">
+  Whether activation is required
+</ResponseField>
+
+<ResponseField name="activation_required" type="boolean">
+  Whether activation is required
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "User created successfully. Please check your phone for the verification code to activate your account.",
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone_number": "+255614853618",
+    "timezone": "Africa/Dar_es_Salaam",
+    "is_verified": false,
+    "is_active": false,
+    "phone_verified": false,
+    "email_notifications": true,
+    "sms_notifications": false,
+    "created_at": "2025-11-27T10:30:00Z",
+    "updated_at": "2025-11-27T10:30:00Z"
+  },
+  "email_verification_sent": false,
+  "sms_verification_sent": true,
+  "account_active": false,
+  "requires_activation": true,
+  "activation_required": true,
+  "tokens": null
+}
+```
+
+</ResponseExample>
+
+## Error Response (400)
+
+<ResponseExample>
+
+```json
+{
+  "email": ["User with this email already exists. Please log in instead."],
+  "password": ["This password is too common."],
+  "password_confirm": ["Passwords don't match."]
+}
+```
+
+</ResponseExample>
+

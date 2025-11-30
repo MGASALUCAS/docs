@@ -1,0 +1,47 @@
+---
+title: 'Update Template'
+api: 'PUT /api/messaging/templates/{template_id}/'
+---
+
+Update an existing template.
+
+<ParamField path="template_id" type="string" required>
+  Template ID
+</ParamField>
+
+<ParamField body="name" type="string">
+  Template name
+</ParamField>
+
+<ParamField body="message" type="string">
+  Template message
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "name": "Welcome Message Updated",
+  "message": "Welcome {{name}}! We're excited to have you."
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Welcome Message Updated",
+  "message": "Welcome {{name}}! We're excited to have you.",
+  "updated_at": "2025-11-27T10:35:00Z"
+}
+```
+
+</ResponseExample>
+

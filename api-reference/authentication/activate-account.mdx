@@ -1,0 +1,47 @@
+---
+title: 'Activate Account'
+api: 'GET /api/auth/activate-account/{token}/'
+---
+
+Activate user account using activation token.
+
+<ParamField path="token" type="string" required>
+  Activation token received via email
+</ParamField>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  Activated user object
+</ResponseField>
+
+<ResponseField name="tokens" type="object">
+  Access and refresh tokens
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Account activated successfully",
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_verified": true,
+    "is_active": true
+  },
+  "tokens": {
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+  }
+}
+```
+
+</ResponseExample>
+

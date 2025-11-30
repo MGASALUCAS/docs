@@ -1,0 +1,35 @@
+---
+title: 'Get Mobile Money Providers'
+api: 'GET /api/billing/payments/providers/'
+---
+
+Get list of available mobile money payment providers.
+
+## Success Response (200)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "providers": [
+    {
+      "id": "mpesa",
+      "name": "M-Pesa",
+      "logo_url": "https://example.com/mpesa-logo.png",
+      "is_active": true,
+      "supported_countries": ["TZ", "KE"]
+    },
+    {
+      "id": "tigopesa",
+      "name": "Tigo Pesa",
+      "logo_url": "https://example.com/tigo-logo.png",
+      "is_active": true,
+      "supported_countries": ["TZ"]
+    }
+  ]
+}
+```
+
+</ResponseExample>
+

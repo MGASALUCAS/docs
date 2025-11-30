@@ -1,0 +1,64 @@
+---
+title: 'Initiate Payment'
+api: 'POST /api/billing/payments/initiate/'
+---
+
+Initiate a payment transaction.
+
+<ParamField body="amount" type="number" required>
+  Payment amount
+</ParamField>
+
+<ParamField body="currency" type="string" required>
+  Currency code (e.g., USD)
+</ParamField>
+
+<ParamField body="payment_method" type="string" required>
+  Payment method
+</ParamField>
+
+<ParamField body="provider" type="string">
+  Payment provider
+</ParamField>
+
+<ParamField body="phone_number" type="string">
+  Phone number for mobile money payments
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "amount": 50.00,
+  "currency": "USD",
+  "payment_method": "mobile_money",
+  "provider": "mpesa",
+  "phone_number": "+255614853618"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "transaction": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "order_id": "ORD-1234567890",
+    "amount": 50.00,
+    "currency": "USD",
+    "status": "pending",
+    "payment_url": "https://payment.gateway.com/pay/xyz123",
+    "expires_at": "2025-11-27T11:00:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

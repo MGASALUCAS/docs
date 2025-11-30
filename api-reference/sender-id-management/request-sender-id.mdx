@@ -1,0 +1,47 @@
+---
+title: 'Request Sender ID'
+api: 'POST /api/messaging/sender-ids/request/'
+---
+
+Request a new sender ID.
+
+<ParamField body="sender_id" type="string" required>
+  Desired sender ID (alphanumeric, max 11 characters)
+</ParamField>
+
+<ParamField body="reason" type="string" required>
+  Reason for requesting this sender ID
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "sender_id": "MYBIZ",
+  "reason": "Business messaging"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "Sender ID request submitted",
+  "sender_id": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "sender_id": "MYBIZ",
+    "status": "pending",
+    "created_at": "2025-11-27T10:30:00Z"
+  }
+}
+```
+
+</ResponseExample>
+

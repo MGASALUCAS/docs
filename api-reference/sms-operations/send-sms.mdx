@@ -1,0 +1,84 @@
+---
+title: 'Send SMS'
+api: 'POST /api/messaging/sms/send/'
+---
+
+Send a single SMS message.
+
+<ParamField body="recipient" type="string" required>
+  Recipient phone number in E.164 format
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  SMS message content
+</ParamField>
+
+<ParamField body="sender_id" type="string" required>
+  Sender ID (must be approved)
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "recipient": "+255614853618",
+  "message": "Hello, this is a test message",
+  "sender_id": "MIFUMO"
+}
+```
+
+</RequestExample>
+
+## Success Response (201)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  SMS message data
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "success": true,
+  "message": "SMS sent successfully",
+  "data": {
+    "message_id": "550e8400-e29b-41d4-a716-446655440000",
+    "recipient": "+255614853618",
+    "message": "Hello, this is a test message",
+    "sender_id": "MIFUMO",
+    "status": "queued",
+    "cost": 0.05,
+    "currency": "USD",
+    "sent_at": "2025-11-27T10:30:00Z"
+  }
+}
+```
+
+</ResponseExample>
+
+## Error Response (402) - Insufficient Credits
+
+<ResponseExample>
+
+```json
+{
+  "success": false,
+  "error": "Insufficient credits",
+  "message": "You need 1 credit to send this message. Current balance: 0 credits",
+  "required_credits": 1,
+  "current_balance": 0
+}
+```
+
+</ResponseExample>
+

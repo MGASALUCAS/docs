@@ -1,0 +1,27 @@
+---
+title: 'Logout'
+api: 'POST /api/auth/logout/'
+---
+
+Logout and invalidate the current session.
+
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Logout successful"
+}
+```
+
+</ResponseExample>
+

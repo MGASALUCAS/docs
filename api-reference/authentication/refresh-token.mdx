@@ -1,0 +1,39 @@
+---
+title: 'Refresh Token'
+api: 'POST /api/auth/token/refresh/'
+---
+
+Refresh an expired access token using a refresh token.
+
+<ParamField body="refresh" type="string" required>
+  Refresh token
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="access" type="string">
+  New access token
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+}
+```
+
+</ResponseExample>
+

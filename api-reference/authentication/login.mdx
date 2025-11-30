@@ -1,0 +1,100 @@
+---
+title: 'Login'
+api: 'POST /api/auth/login/'
+---
+
+Authenticate and receive access tokens.
+
+<ParamField body="email" type="string" required>
+  User email address
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  User password
+</ParamField>
+
+## Request Example
+
+<RequestExample>
+
+```json
+{
+  "email": "user@example.com",
+  "password": "SecurePassword123!"
+}
+```
+
+</RequestExample>
+
+## Success Response (200)
+
+<ResponseField name="message" type="string">
+  Success message
+</ResponseField>
+
+<ResponseField name="user" type="object">
+  User object with profile details
+</ResponseField>
+
+<ResponseField name="tokens" type="object">
+  Access and refresh tokens
+</ResponseField>
+
+<ResponseExample>
+
+```json
+{
+  "message": "Login successful",
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "full_name": "John Doe",
+    "short_name": "John",
+    "phone_number": "+255614853618",
+    "timezone": "Africa/Dar_es_Salaam",
+    "is_verified": true,
+    "is_active": true,
+    "phone_verified": true,
+    "email_notifications": true,
+    "sms_notifications": false,
+    "created_at": "2025-11-27T10:30:00Z",
+    "updated_at": "2025-11-27T10:30:00Z",
+    "last_login_at": "2025-11-27T10:30:00Z"
+  },
+  "tokens": {
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+  }
+}
+```
+
+</ResponseExample>
+
+## Error Response (400)
+
+<ResponseExample>
+
+```json
+{
+  "non_field_errors": ["Invalid credentials."]
+}
+```
+
+</ResponseExample>
+
+## Error Response (400) - Account Not Verified
+
+<ResponseExample>
+
+```json
+{
+  "non_field_errors": [
+    "Your account has not been activated. We have sent a 6-digit verification code to your email. Please check your email and use the code to verify your account, or visit /api/auth/resend-activation/ to resend."
+  ]
+}
+```
+
+</ResponseExample>
+
