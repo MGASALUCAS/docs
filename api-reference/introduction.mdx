@@ -37,13 +37,25 @@ The API is organized into the following sections:
 - [Sender ID Management](/api-reference/sender-id-management/list-sender-ids) - Manage sender IDs
 - [Dashboard & Analytics](/api-reference/dashboard-analytics/overview) - Analytics and reporting
 
+## Authentication Headers
+
+All authenticated endpoints require the following header:
+
+```
+Authorization: Bearer {access_token}
+```
+
+The access token is obtained from the login endpoint and should be included in all subsequent requests.
+
 ## Rate Limiting
 
 API requests are rate-limited to prevent abuse:
+
 - **Authenticated requests**: 1000 requests per hour
 - **Unauthenticated requests**: 100 requests per hour
 
 Rate limit headers are included in responses:
+
 ```
 X-RateLimit-Limit: 1000
 X-RateLimit-Remaining: 999
@@ -53,25 +65,51 @@ X-RateLimit-Reset: 1638000000
 ## Pagination
 
 List endpoints support pagination with the following query parameters:
+
 - `page` (integer): Page number (default: 1)
 - `page_size` (integer): Items per page (default: 20, max: 100)
 
+Pagination response format:
+
+```json
+{
+  "count": 150,
+  "next": "https://api.example.com/endpoint/?page=2",
+  "previous": null,
+  "results": [...]
+}
+```
+
 ## Date Formats
 
-All dates are returned in ISO 8601 format: `2025-11-27T10:30:00Z`
+All dates are returned in ISO 8601 format:
+
+```
+2025-11-27T10:30:00Z
+```
+
+When sending dates in requests, use the same format or:
+- Date only: `2025-11-27`
+- Date and time: `2025-11-27T10:30:00Z`
 
 ## Phone Number Format
 
 Phone numbers should be in E.164 format:
+
 - ✅ Correct: `+255614853618`
 - ❌ Incorrect: `0614853618`, `255614853618`
+
+The API will attempt to normalize phone numbers, but it's recommended to send them in E.164 format.
 
 ## Support
 
 For API support, contact:
+
 - **Email**: api@mifumo.com
 - **Documentation**: https://docs.mifumo.com
 - **Status Page**: https://status.mifumo.com
+
+---
 
 **Last Updated**: November 2025
 **API Version**: 1.0
