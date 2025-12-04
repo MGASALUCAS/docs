@@ -223,12 +223,7 @@
         "label": "Documentation",
         "href": "https://docs.mifumo.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "/api-reference/introduction"
-    }
+    ]
   },
   "contextual": {
     "options": [
