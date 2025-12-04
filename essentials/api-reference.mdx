@@ -1,0 +1,292 @@
+---
+title: 'API Reference Guide'
+description: 'Complete guide to using the Mifumo SMS API'
+icon: 'book'
+---
+
+## Overview
+
+The Mifumo SMS API provides a comprehensive REST API for sending SMS messages, managing contacts, campaigns, templates, and more. This guide covers the essential concepts and patterns used throughout the API.
+
+## Base URL
+
+All API requests should be made to:
+
+```
+https://mifumosms.mifumolabs.com/api/
+```
+
+## Authentication
+
+Most endpoints require authentication using JWT Bearer tokens. Include the access token in the Authorization header:
+
+```
+Authorization: Bearer {access_token}
+```
+
+### Getting an Access Token
+
+1. **Register** a new account via `POST /api/auth/register/`
+2. **Login** via `POST /api/auth/login/` to receive access and refresh tokens
+3. Use the **access token** in subsequent requests
+4. **Refresh** the token when it expires using `POST /api/auth/token/refresh/`
+
+<Tip>
+Access tokens expire after a set period. Always implement token refresh logic in your application.
+</Tip>
+
+## Request Format
+
+### Headers
+
+All requests should include:
+
+```
+Content-Type: application/json
+Authorization: Bearer {access_token}  # For authenticated endpoints
+```
+
+### Request Body
+
+Request bodies should be JSON formatted:
+
+```json
+{
+  "field1": "value1",
+  "field2": "value2"
+}
+```
+
+## Response Format
+
+### Success Responses
+
+Success responses follow this structure:
+
+```json
+{
+  "success": true,
+  "message": "Operation successful",
+  "data": {
+    // Response data
+  }
+}
+```
+
+### Error Responses
+
+Error responses include:
+
+```json
+{
+  "error": "Error type",
+  "message": "Human-readable error message",
+  "details": {
+    "field_name": ["Error message for this field"]
+  }
+}
+```
+
+## HTTP Status Codes
+
+| Code | Meaning | Description |
+|------|---------|-------------|
+| 200 | OK | Request successful |
+| 201 | Created | Resource created successfully |
+| 204 | No Content | Request successful, no content returned |
+| 400 | Bad Request | Invalid request data |
+| 401 | Unauthorized | Authentication required |
+| 402 | Payment Required | Insufficient credits/balance |
+| 403 | Forbidden | Insufficient permissions |
+| 404 | Not Found | Resource not found |
+| 429 | Too Many Requests | Rate limit exceeded |
+| 500 | Internal Server Error | Server error |
+
+## Pagination
+
+List endpoints support pagination using query parameters:
+
+- `page` (integer): Page number (default: 1)
+- `page_size` (integer): Items per page (default: 20, max: 100)
+
+### Pagination Response Format
+
+```json
+{
+  "count": 150,
+  "next": "https://mifumosms.mifumolabs.com/api/endpoint/?page=2",
+  "previous": null,
+  "results": [
+    // Array of items
+  ]
+}
+```
+
+## Date Formats
+
+All dates are returned in ISO 8601 format:
+
+```
+2025-11-27T10:30:00Z
+```
+
+When sending dates in requests, use:
+- Date only: `2025-11-27`
+- Date and time: `2025-11-27T10:30:00Z`
+
+## Phone Number Format
+
+Phone numbers must be in E.164 format:
+
+- ✅ Correct: `+255614853618`
+- ❌ Incorrect: `0614853618`, `255614853618`
+
+<Tip>
+The API will attempt to normalize phone numbers, but it's recommended to send them in E.164 format to avoid errors.
+</Tip>
+
+## Rate Limiting
+
+API requests are rate-limited to prevent abuse:
+
+- **Authenticated requests**: 1000 requests per hour
+- **Unauthenticated requests**: 100 requests per hour
+
+Rate limit information is included in response headers:
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1638000000
+```
+
+<Warning>
+If you exceed the rate limit, you'll receive a 429 status code. Implement exponential backoff in your retry logic.
+</Warning>
+
+## Common Patterns
+
+### Sending an SMS
+
+```javascript
+const response = await fetch('https://mifumosms.mifumolabs.com/api/messaging/sms/send/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    recipient: '+255614853618',
+    message: 'Hello, this is a test message',
+    sender_id: 'MIFUMO'
+  })
+});
+```
+
+### Handling Errors
+
+```javascript
+try {
+  const response = await fetch(url, options);
+  
+  if (!response.ok) {
+    if (response.status === 401) {
+      // Token expired, refresh it
+      await refreshToken();
+    } else if (response.status === 402) {
+      // Insufficient credits
+      const error = await response.json();
+      console.error('Insufficient credits:', error.message);
+    } else {
+      // Other error
+      const error = await response.json();
+      console.error('Error:', error.message);
+    }
+  }
+} catch (error) {
+  console.error('Network error:', error);
+}
+```
+
+### Pagination
+
+```javascript
+async function getAllContacts() {
+  let allContacts = [];
+  let nextUrl = 'https://mifumosms.mifumolabs.com/api/messaging/contacts/';
+  
+  while (nextUrl) {
+    const response = await fetch(nextUrl, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    const data = await response.json();
+    
+    allContacts = allContacts.concat(data.results);
+    nextUrl = data.next;
+  }
+  
+  return allContacts;
+}
+```
+
+## API Sections
+
+The API is organized into the following sections:
+
+### Authentication
+User registration, login, token management, and account activation.
+
+### User Management
+Profile management, settings, preferences, and password management.
+
+### SMS Operations
+Send SMS, check balance, delivery status, and statistics.
+
+### Contact Management
+Create, update, delete contacts, bulk operations, and opt-in/opt-out.
+
+### Campaign Management
+Create and manage SMS campaigns, scheduling, and analytics.
+
+### Template Management
+Create and manage SMS message templates with variables.
+
+### Billing & Payments
+Purchase SMS packages, payment processing, and billing history.
+
+### Tenant Management
+Multi-tenant organization management and team collaboration.
+
+### Notifications
+System notifications and activity tracking.
+
+### Sender ID Management
+Request and manage sender IDs for SMS messages.
+
+### Dashboard & Analytics
+Comprehensive analytics, metrics, and reporting.
+
+## Best Practices
+
+1. **Always validate phone numbers** before sending SMS
+2. **Handle rate limits** gracefully with exponential backoff
+3. **Refresh tokens** before they expire
+4. **Use pagination** for large datasets
+5. **Implement retry logic** for transient failures
+6. **Log errors** for debugging and monitoring
+7. **Validate request data** before sending to the API
+
+## Support
+
+For API support, contact:
+
+- **Email**: api@mifumo.com
+- **Documentation**: https://docs.mifumo.com
+- **Status Page**: https://status.mifumo.com
+
+---
+
+For detailed endpoint documentation, see the [API Reference](/api-reference/introduction) section.
+

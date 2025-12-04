@@ -4,6 +4,7 @@ This directory contains code examples demonstrating how to use the Mifumo SMS AP
 
 ## Files
 
+- **api-reference.md** - Complete API reference documentation
 - **javascript-example.js** - JavaScript/Node.js example
 - **python-example.py** - Python example
 - **curl-examples.sh** - Bash/cURL example script
