@@ -9,7 +9,39 @@ Get recent activity log.
   Number of activities to return (default: 20)
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="count" type="integer">
+  Total number of activities returned
+</ResponseField>
+
+<ResponseField name="activities" type="array">
+  Array of activity objects
+</ResponseField>
+
+<ResponseField name="activities[].id" type="string">
+  Activity ID
+</ResponseField>
+
+<ResponseField name="activities[].type" type="string">
+  Activity type
+</ResponseField>
+
+<ResponseField name="activities[].description" type="string">
+  Activity description
+</ResponseField>
+
+<ResponseField name="activities[].user" type="object">
+  User who performed the activity
+</ResponseField>
+
+<ResponseField name="activities[].timestamp" type="string">
+  Activity timestamp (ISO 8601)
+</ResponseField>
 
 <ResponseExample>
 

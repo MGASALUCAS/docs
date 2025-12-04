@@ -9,7 +9,43 @@ Check the status of a payment transaction.
   Transaction ID
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="transaction" type="object">
+  Transaction object
+</ResponseField>
+
+<ResponseField name="transaction.id" type="string">
+  Transaction ID
+</ResponseField>
+
+<ResponseField name="transaction.order_id" type="string">
+  Order ID
+</ResponseField>
+
+<ResponseField name="transaction.amount" type="float">
+  Transaction amount
+</ResponseField>
+
+<ResponseField name="transaction.currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="transaction.status" type="string">
+  Transaction status
+</ResponseField>
+
+<ResponseField name="transaction.completed_at" type="string">
+  Completion timestamp (ISO 8601, nullable)
+</ResponseField>
 
 <ResponseExample>
 

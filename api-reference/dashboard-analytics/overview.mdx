@@ -5,7 +5,47 @@ api: 'GET /api/messaging/dashboard/overview/'
 
 Get dashboard overview statistics and recent activity.
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="stats" type="object">
+  Dashboard statistics object
+</ResponseField>
+
+<ResponseField name="stats.total_contacts" type="integer">
+  Total number of contacts
+</ResponseField>
+
+<ResponseField name="stats.total_campaigns" type="integer">
+  Total number of campaigns
+</ResponseField>
+
+<ResponseField name="stats.total_messages_sent" type="integer">
+  Total messages sent
+</ResponseField>
+
+<ResponseField name="stats.total_messages_delivered" type="integer">
+  Total messages delivered
+</ResponseField>
+
+<ResponseField name="stats.delivery_rate" type="float">
+  Delivery rate percentage
+</ResponseField>
+
+<ResponseField name="stats.total_spent" type="float">
+  Total amount spent
+</ResponseField>
+
+<ResponseField name="stats.current_balance" type="float">
+  Current SMS balance
+</ResponseField>
+
+<ResponseField name="recent_activity" type="array">
+  Array of recent activity items
+</ResponseField>
 
 <ResponseExample>
 

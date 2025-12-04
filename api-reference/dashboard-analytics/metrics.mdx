@@ -9,7 +9,47 @@ Get detailed metrics for a specific time period.
   Time period (7d, 30d, 90d, 1y)
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="period" type="string">
+  Selected time period
+</ResponseField>
+
+<ResponseField name="metrics" type="object">
+  Metrics object containing various statistics
+</ResponseField>
+
+<ResponseField name="metrics.messages_sent" type="integer">
+  Number of messages sent in the period
+</ResponseField>
+
+<ResponseField name="metrics.messages_delivered" type="integer">
+  Number of messages delivered in the period
+</ResponseField>
+
+<ResponseField name="metrics.delivery_rate" type="float">
+  Delivery rate percentage
+</ResponseField>
+
+<ResponseField name="metrics.cost" type="float">
+  Total cost for the period
+</ResponseField>
+
+<ResponseField name="metrics.contacts_added" type="integer">
+  Number of contacts added in the period
+</ResponseField>
+
+<ResponseField name="metrics.campaigns_created" type="integer">
+  Number of campaigns created in the period
+</ResponseField>
+
+<ResponseField name="daily_breakdown" type="array">
+  Daily breakdown of metrics
+</ResponseField>
 
 <ResponseExample>
 

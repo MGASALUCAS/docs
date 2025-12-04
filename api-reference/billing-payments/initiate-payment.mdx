@@ -14,16 +14,20 @@ Initiate a payment transaction.
 </ParamField>
 
 <ParamField body="payment_method" type="string" required>
-  Payment method
+  Payment method (mobile_money, card)
 </ParamField>
 
 <ParamField body="provider" type="string">
-  Payment provider
+  Payment provider (mpesa, tigopesa, etc.)
 </ParamField>
 
 <ParamField body="phone_number" type="string">
   Phone number for mobile money payments
 </ParamField>
+
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
 
 ## Request Example
 
@@ -42,6 +46,42 @@ Initiate a payment transaction.
 </RequestExample>
 
 ## Success Response (201)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="transaction" type="object">
+  Transaction object
+</ResponseField>
+
+<ResponseField name="transaction.id" type="string">
+  Transaction ID
+</ResponseField>
+
+<ResponseField name="transaction.order_id" type="string">
+  Order ID
+</ResponseField>
+
+<ResponseField name="transaction.amount" type="float">
+  Transaction amount
+</ResponseField>
+
+<ResponseField name="transaction.currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="transaction.status" type="string">
+  Transaction status
+</ResponseField>
+
+<ResponseField name="transaction.payment_url" type="string">
+  Payment URL for redirect
+</ResponseField>
+
+<ResponseField name="transaction.expires_at" type="string">
+  Expiration timestamp (ISO 8601)
+</ResponseField>
 
 <ResponseExample>
 

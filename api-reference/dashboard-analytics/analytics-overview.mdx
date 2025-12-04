@@ -13,7 +13,51 @@ Get comprehensive analytics overview for a date range.
   End date (YYYY-MM-DD)
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="period" type="object">
+  Period object with start and end dates
+</ResponseField>
+
+<ResponseField name="overview" type="object">
+  Overview statistics
+</ResponseField>
+
+<ResponseField name="overview.total_messages" type="integer">
+  Total messages in the period
+</ResponseField>
+
+<ResponseField name="overview.delivered" type="integer">
+  Total delivered messages
+</ResponseField>
+
+<ResponseField name="overview.failed" type="integer">
+  Total failed messages
+</ResponseField>
+
+<ResponseField name="overview.delivery_rate" type="float">
+  Delivery rate percentage
+</ResponseField>
+
+<ResponseField name="overview.total_cost" type="float">
+  Total cost
+</ResponseField>
+
+<ResponseField name="overview.average_cost_per_message" type="float">
+  Average cost per message
+</ResponseField>
+
+<ResponseField name="by_status" type="object">
+  Breakdown by status
+</ResponseField>
+
+<ResponseField name="by_day" type="array">
+  Daily breakdown array
+</ResponseField>
 
 <ResponseExample>
 

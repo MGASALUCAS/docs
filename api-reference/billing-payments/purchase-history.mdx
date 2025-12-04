@@ -17,7 +17,55 @@ Get history of SMS package purchases.
   Filter by status (pending, completed, failed)
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="count" type="integer">
+  Total number of purchases
+</ResponseField>
+
+<ResponseField name="next" type="string">
+  URL to next page (nullable)
+</ResponseField>
+
+<ResponseField name="previous" type="string">
+  URL to previous page (nullable)
+</ResponseField>
+
+<ResponseField name="results" type="array">
+  Array of purchase objects
+</ResponseField>
+
+<ResponseField name="results[].id" type="string">
+  Purchase ID
+</ResponseField>
+
+<ResponseField name="results[].package_name" type="string">
+  Package name
+</ResponseField>
+
+<ResponseField name="results[].sms_count" type="integer">
+  Number of SMS credits purchased
+</ResponseField>
+
+<ResponseField name="results[].price" type="float">
+  Purchase price
+</ResponseField>
+
+<ResponseField name="results[].currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="results[].status" type="string">
+  Purchase status
+</ResponseField>
+
+<ResponseField name="results[].purchased_at" type="string">
+  Purchase timestamp (ISO 8601)
+</ResponseField>
 
 <ResponseExample>
 

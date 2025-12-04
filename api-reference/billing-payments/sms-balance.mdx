@@ -5,7 +5,39 @@ api: 'GET /api/billing/sms/balance/'
 
 Get current SMS balance and usage information.
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="balance" type="object">
+  Balance information object
+</ResponseField>
+
+<ResponseField name="balance.credits" type="integer">
+  Current SMS credits
+</ResponseField>
+
+<ResponseField name="balance.currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="balance.last_updated" type="string">
+  Last update timestamp (ISO 8601)
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  Usage information object
+</ResponseField>
+
+<ResponseField name="usage.used_this_month" type="integer">
+  SMS credits used this month
+</ResponseField>
+
+<ResponseField name="usage.remaining" type="integer">
+  Remaining SMS credits
+</ResponseField>
 
 <ResponseExample>
 

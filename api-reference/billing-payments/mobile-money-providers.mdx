@@ -5,7 +5,39 @@ api: 'GET /api/billing/payments/providers/'
 
 Get list of available mobile money payment providers.
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="success" type="boolean">
+  Operation success status
+</ResponseField>
+
+<ResponseField name="providers" type="array">
+  Array of payment provider objects
+</ResponseField>
+
+<ResponseField name="providers[].id" type="string">
+  Provider ID
+</ResponseField>
+
+<ResponseField name="providers[].name" type="string">
+  Provider name
+</ResponseField>
+
+<ResponseField name="providers[].logo_url" type="string">
+  Provider logo URL
+</ResponseField>
+
+<ResponseField name="providers[].is_active" type="boolean">
+  Whether provider is active
+</ResponseField>
+
+<ResponseField name="providers[].supported_countries" type="array">
+  Array of supported country codes
+</ResponseField>
 
 <ResponseExample>
 

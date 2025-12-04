@@ -5,7 +5,51 @@ api: 'GET /api/billing/sms/packages/'
 
 List all available SMS packages for purchase.
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="count" type="integer">
+  Total number of packages
+</ResponseField>
+
+<ResponseField name="results" type="array">
+  Array of SMS package objects
+</ResponseField>
+
+<ResponseField name="results[].id" type="string">
+  Package ID
+</ResponseField>
+
+<ResponseField name="results[].name" type="string">
+  Package name
+</ResponseField>
+
+<ResponseField name="results[].sms_count" type="integer">
+  Number of SMS credits in package
+</ResponseField>
+
+<ResponseField name="results[].price" type="float">
+  Package price
+</ResponseField>
+
+<ResponseField name="results[].currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="results[].bonus_sms" type="integer">
+  Bonus SMS credits
+</ResponseField>
+
+<ResponseField name="results[].validity_days" type="integer">
+  Validity period in days
+</ResponseField>
+
+<ResponseField name="results[].is_active" type="boolean">
+  Whether package is active
+</ResponseField>
 
 <ResponseExample>
 

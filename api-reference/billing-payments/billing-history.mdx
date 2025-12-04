@@ -17,7 +17,55 @@ Get billing history including purchases, payments, and usage.
   Filter by type (purchase, payment, usage)
 </ParamField>
 
+<Warning>
+  Requires authentication. Include the access token in the Authorization header.
+</Warning>
+
 ## Success Response (200)
+
+<ResponseField name="count" type="integer">
+  Total number of billing records
+</ResponseField>
+
+<ResponseField name="next" type="string">
+  URL to next page (nullable)
+</ResponseField>
+
+<ResponseField name="previous" type="string">
+  URL to previous page (nullable)
+</ResponseField>
+
+<ResponseField name="results" type="array">
+  Array of billing history objects
+</ResponseField>
+
+<ResponseField name="results[].id" type="string">
+  Billing record ID
+</ResponseField>
+
+<ResponseField name="results[].type" type="string">
+  Record type (purchase, payment, usage)
+</ResponseField>
+
+<ResponseField name="results[].description" type="string">
+  Description of the transaction
+</ResponseField>
+
+<ResponseField name="results[].amount" type="float">
+  Transaction amount (negative for usage)
+</ResponseField>
+
+<ResponseField name="results[].currency" type="string">
+  Currency code
+</ResponseField>
+
+<ResponseField name="results[].status" type="string">
+  Transaction status
+</ResponseField>
+
+<ResponseField name="results[].created_at" type="string">
+  Creation timestamp (ISO 8601)
+</ResponseField>
 
 <ResponseExample>
 
