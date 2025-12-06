@@ -1,9 +1,0 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Rounded square background with chat icon -->
-  <rect x="0" y="0" width="40" height="40" rx="8" fill="#1E40AF"/>
-  <!-- Speech bubble outline -->
-  <rect x="10" y="10" width="20" height="14" rx="3" stroke="white" stroke-width="2" fill="none"/>
-  <!-- Tail pointing down-left -->
-  <path d="M10 24L6 28L10 24Z" fill="white"/>
-  <path d="M10 24L6 28" stroke="white" stroke-width="2" stroke-linecap="round"/>
-</svg>

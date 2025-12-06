@@ -1,196 +1,192 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mifumo SMS API",
-  "hidePoweredBy": true,
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "index",
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "api-reference/authentication/register",
-              "api-reference/authentication/login",
-              "api-reference/authentication/refresh-token",
-              "api-reference/authentication/logout",
-              "api-reference/authentication/activate-account",
-              "api-reference/authentication/verify-email",
-              "api-reference/authentication/resend-activation",
-              "api-reference/authentication/sms-verification",
-              "api-reference/authentication/verify-phone-code",
-              "api-reference/authentication/sms-confirm-account",
-              "api-reference/authentication/forgot-password",
-              "api-reference/authentication/password-reset",
-              "api-reference/authentication/password-reset-confirm",
-              "api-reference/authentication/sms-forgot-password",
-              "api-reference/authentication/sms-reset-password"
-            ]
-          },
-          {
-            "group": "User Management",
-            "pages": [
-              "api-reference/user-management/profile",
-              "api-reference/user-management/update-profile",
-              "api-reference/user-management/update-preferences",
-              "api-reference/user-management/update-notifications",
-              "api-reference/user-management/change-password"
-            ]
-          },
-          {
-            "group": "SMS Operations",
-            "pages": [
-              "api-reference/sms-operations/send-sms",
-              "api-reference/sms-operations/sms-balance",
-              "api-reference/sms-operations/sms-stats",
-              "api-reference/sms-operations/delivery-status",
-              "api-reference/sms-operations/validate-phone",
-              "api-reference/sms-operations/quick-sms"
-            ]
-          },
-          {
-            "group": "Contact Management",
-            "pages": [
-              "api-reference/contact-management/list-contacts",
-              "api-reference/contact-management/create-contact",
-              "api-reference/contact-management/get-contact",
-              "api-reference/contact-management/update-contact",
-              "api-reference/contact-management/delete-contact",
-              "api-reference/contact-management/bulk-import",
-              "api-reference/contact-management/bulk-delete",
-              "api-reference/contact-management/opt-in",
-              "api-reference/contact-management/opt-out"
-            ]
-          },
-          {
-            "group": "Campaign Management",
-            "pages": [
-              "api-reference/campaign-management/list-campaigns",
-              "api-reference/campaign-management/create-campaign",
-              "api-reference/campaign-management/get-campaign",
-              "api-reference/campaign-management/start-campaign",
-              "api-reference/campaign-management/pause-campaign",
-              "api-reference/campaign-management/cancel-campaign",
-              "api-reference/campaign-management/campaign-analytics",
-              "api-reference/campaign-management/duplicate-campaign"
-            ]
-          },
-          {
-            "group": "Template Management",
-            "pages": [
-              "api-reference/template-management/list-templates",
-              "api-reference/template-management/create-template",
-              "api-reference/template-management/get-template",
-              "api-reference/template-management/update-template",
-              "api-reference/template-management/delete-template",
-              "api-reference/template-management/toggle-favorite",
-              "api-reference/template-management/template-variables"
-            ]
-          },
-          {
-            "group": "Billing & Payments",
-            "pages": [
-              "api-reference/billing-payments/sms-packages",
-              "api-reference/billing-payments/sms-balance",
-              "api-reference/billing-payments/purchase-package",
-              "api-reference/billing-payments/purchase-history",
-              "api-reference/billing-payments/initiate-payment",
-              "api-reference/billing-payments/payment-status",
-              "api-reference/billing-payments/mobile-money-providers",
-              "api-reference/billing-payments/billing-history"
-            ]
-          },
-          {
-            "group": "Tenant Management",
-            "pages": [
-              "api-reference/tenant-management/list-tenants",
-              "api-reference/tenant-management/switch-tenant",
-              "api-reference/tenant-management/team-members",
-              "api-reference/tenant-management/invite-member"
-            ]
-          },
-          {
-            "group": "Notifications",
-            "pages": [
-              "api-reference/notifications/list-notifications",
-              "api-reference/notifications/mark-read",
-              "api-reference/notifications/mark-all-read",
-              "api-reference/notifications/unread-count"
-            ]
-          },
-          {
-            "group": "Sender ID Management",
-            "pages": [
-              "api-reference/sender-id-management/list-sender-ids",
-              "api-reference/sender-id-management/request-sender-id",
-              "api-reference/sender-id-management/sender-id-status"
-            ]
-          },
-          {
-            "group": "Dashboard & Analytics",
-            "pages": [
-              "api-reference/dashboard-analytics/overview",
-              "api-reference/dashboard-analytics/metrics",
-              "api-reference/dashboard-analytics/analytics-overview",
-              "api-reference/dashboard-analytics/recent-activity"
-            ]
-          },
-          {
-            "group": "Error Handling",
-            "pages": [
-              "api-reference/error-handling"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:api@mifumo.com"
-      },
-      {
-        "label": "Documentation",
-        "href": "https://docs.mifumo.com"
-      }
-    ]
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/MGASALUCAS/docs"
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Mifumo SMS API",
+    "hidePoweredBy": true,
+    "colors": {
+        "primary": "#16A34A",
+        "light": "#07C983",
+        "dark": "#15803D"
     },
-    "copyright": "© 2025 Mifumo Labs. All rights reserved."
-  }
+    "favicon": "/favicon.png",
+    "logo": {
+        "light": "/logo/light.png",
+        "dark": "/logo/dark.png"
+    },
+    "navigation": {
+        "tabs": [{
+            "tab": "API reference",
+            "groups": [{
+                    "group": "Getting Started",
+                    "pages": [
+                        "index",
+                        "api-reference/introduction"
+                    ]
+                },
+                {
+                    "group": "Authentication",
+                    "pages": [
+                        "api-reference/authentication/register",
+                        "api-reference/authentication/login",
+                        "api-reference/authentication/refresh-token",
+                        "api-reference/authentication/logout",
+                        "api-reference/authentication/activate-account",
+                        "api-reference/authentication/verify-email",
+                        "api-reference/authentication/resend-activation",
+                        "api-reference/authentication/sms-verification",
+                        "api-reference/authentication/verify-phone-code",
+                        "api-reference/authentication/sms-confirm-account",
+                        "api-reference/authentication/forgot-password",
+                        "api-reference/authentication/password-reset",
+                        "api-reference/authentication/password-reset-confirm",
+                        "api-reference/authentication/sms-forgot-password",
+                        "api-reference/authentication/sms-reset-password"
+                    ]
+                },
+                {
+                    "group": "User Management",
+                    "pages": [
+                        "api-reference/user-management/profile",
+                        "api-reference/user-management/update-profile",
+                        "api-reference/user-management/update-preferences",
+                        "api-reference/user-management/update-notifications",
+                        "api-reference/user-management/change-password"
+                    ]
+                },
+                {
+                    "group": "SMS Operations",
+                    "pages": [
+                        "api-reference/sms-operations/send-sms",
+                        "api-reference/sms-operations/sms-balance",
+                        "api-reference/sms-operations/sms-stats",
+                        "api-reference/sms-operations/delivery-status",
+                        "api-reference/sms-operations/validate-phone",
+                        "api-reference/sms-operations/quick-sms"
+                    ]
+                },
+                {
+                    "group": "Contact Management",
+                    "pages": [
+                        "api-reference/contact-management/list-contacts",
+                        "api-reference/contact-management/create-contact",
+                        "api-reference/contact-management/get-contact",
+                        "api-reference/contact-management/update-contact",
+                        "api-reference/contact-management/delete-contact",
+                        "api-reference/contact-management/bulk-import",
+                        "api-reference/contact-management/bulk-delete",
+                        "api-reference/contact-management/opt-in",
+                        "api-reference/contact-management/opt-out"
+                    ]
+                },
+                {
+                    "group": "Campaign Management",
+                    "pages": [
+                        "api-reference/campaign-management/list-campaigns",
+                        "api-reference/campaign-management/create-campaign",
+                        "api-reference/campaign-management/get-campaign",
+                        "api-reference/campaign-management/start-campaign",
+                        "api-reference/campaign-management/pause-campaign",
+                        "api-reference/campaign-management/cancel-campaign",
+                        "api-reference/campaign-management/campaign-analytics",
+                        "api-reference/campaign-management/duplicate-campaign"
+                    ]
+                },
+                {
+                    "group": "Template Management",
+                    "pages": [
+                        "api-reference/template-management/list-templates",
+                        "api-reference/template-management/create-template",
+                        "api-reference/template-management/get-template",
+                        "api-reference/template-management/update-template",
+                        "api-reference/template-management/delete-template",
+                        "api-reference/template-management/toggle-favorite",
+                        "api-reference/template-management/template-variables"
+                    ]
+                },
+                {
+                    "group": "Billing & Payments",
+                    "pages": [
+                        "api-reference/billing-payments/sms-packages",
+                        "api-reference/billing-payments/sms-balance",
+                        "api-reference/billing-payments/purchase-package",
+                        "api-reference/billing-payments/purchase-history",
+                        "api-reference/billing-payments/initiate-payment",
+                        "api-reference/billing-payments/payment-status",
+                        "api-reference/billing-payments/mobile-money-providers",
+                        "api-reference/billing-payments/billing-history"
+                    ]
+                },
+                {
+                    "group": "Tenant Management",
+                    "pages": [
+                        "api-reference/tenant-management/list-tenants",
+                        "api-reference/tenant-management/switch-tenant",
+                        "api-reference/tenant-management/team-members",
+                        "api-reference/tenant-management/invite-member"
+                    ]
+                },
+                {
+                    "group": "Notifications",
+                    "pages": [
+                        "api-reference/notifications/list-notifications",
+                        "api-reference/notifications/mark-read",
+                        "api-reference/notifications/mark-all-read",
+                        "api-reference/notifications/unread-count"
+                    ]
+                },
+                {
+                    "group": "Sender ID Management",
+                    "pages": [
+                        "api-reference/sender-id-management/list-sender-ids",
+                        "api-reference/sender-id-management/request-sender-id",
+                        "api-reference/sender-id-management/sender-id-status"
+                    ]
+                },
+                {
+                    "group": "Dashboard & Analytics",
+                    "pages": [
+                        "api-reference/dashboard-analytics/overview",
+                        "api-reference/dashboard-analytics/metrics",
+                        "api-reference/dashboard-analytics/analytics-overview",
+                        "api-reference/dashboard-analytics/recent-activity"
+                    ]
+                },
+                {
+                    "group": "Error Handling",
+                    "pages": [
+                        "api-reference/error-handling"
+                    ]
+                }
+            ]
+        }]
+    },
+    "navbar": {
+        "links": [{
+                "label": "Support",
+                "href": "mailto:api@mifumo.com"
+            },
+            {
+                "label": "Documentation",
+                "href": "https://docs.mifumo.com"
+            }
+        ]
+    },
+    "contextual": {
+        "options": [
+            "copy",
+            "view",
+            "chatgpt",
+            "claude",
+            "perplexity",
+            "mcp",
+            "cursor",
+            "vscode"
+        ]
+    },
+    "footer": {
+        "socials": {
+            "github": "https://github.com/MGASALUCAS/docs"
+        },
+        "copyright": "© 2025 Mifumo Labs. All rights reserved."
+    }
 }
