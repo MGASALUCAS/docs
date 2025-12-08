@@ -4,23 +4,23 @@
 
 This is a comprehensive API documentation for frontend developers. It includes all endpoints with complete JSON request/response examples.
 
-**Base URL:** `https://mifumosms.mifumolabs.com/api/`  
-**API Version:** 1.0  
+**Base URL:** `https://mifumosms.mifumolabs.com/api/`\
+**API Version:** 1.1\
 **Authentication:** JWT Bearer Token
 
 ---
 
 ## Table of Contents
 
-1. [Authentication](#authentication)
-2. [User Management](#user-management)
-3. [SMS Operations](#sms-operations)
-4. [Contact Management](#contact-management)
-5. [Campaign Management](#campaign-management)
-6. [Template Management](#template-management)
-7. [Billing & Payments](#billing--payments)
-8. [Tenant Management](#tenant-management)
-9. [Notifications](#notifications)
+ 1. [Authentication](#authentication)
+ 2. [User Management](#user-management)
+ 3. [SMS Operations](#sms-operations)
+ 4. [Contact Management](#contact-management)
+ 5. [Campaign Management](#campaign-management)
+ 6. [Template Management](#template-management)
+ 7. [Billing & Payments](#billing--payments)
+ 8. [Tenant Management](#tenant-management)
+ 9. [Notifications](#notifications)
 10. [Sender ID Management](#sender-id-management)
 11. [Dashboard & Analytics](#dashboard--analytics)
 12. [Error Handling](#error-handling)
@@ -34,11 +34,13 @@ This is a comprehensive API documentation for frontend developers. It includes a
 **Endpoint:** `POST /api/auth/register/`
 
 **Request Headers:**
+
 ```
 Content-Type: application/json
 ```
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -56,6 +58,7 @@ Content-Type: application/json
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "message": "User created successfully. Please check your phone for the verification code to activate your account.",
@@ -84,6 +87,7 @@ Content-Type: application/json
 ```
 
 **Error Response (400):**
+
 ```json
 {
   "email": ["User with this email already exists. Please log in instead."],
@@ -99,6 +103,7 @@ Content-Type: application/json
 **Endpoint:** `POST /api/auth/login/`
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -107,6 +112,7 @@ Content-Type: application/json
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Login successful",
@@ -136,6 +142,7 @@ Content-Type: application/json
 ```
 
 **Error Response (400):**
+
 ```json
 {
   "non_field_errors": ["Invalid credentials."]
@@ -143,6 +150,7 @@ Content-Type: application/json
 ```
 
 **Error Response (400) - Account Not Verified:**
+
 ```json
 {
   "non_field_errors": [
@@ -158,6 +166,7 @@ Content-Type: application/json
 **Endpoint:** `POST /api/auth/token/refresh/`
 
 **Request Body:**
+
 ```json
 {
   "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
@@ -165,6 +174,7 @@ Content-Type: application/json
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
@@ -178,11 +188,13 @@ Content-Type: application/json
 **Endpoint:** `POST /api/auth/logout/`
 
 **Request Headers:**
+
 ```
 Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Logout successful"
@@ -196,6 +208,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `GET /api/auth/activate-account/{token}/`
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Account activated successfully",
@@ -221,6 +234,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/verify-email/`
 
 **Request Body:**
+
 ```json
 {
   "token": "123456"
@@ -228,6 +242,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Account activated successfully",
@@ -253,6 +268,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/resend-activation/`
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com"
@@ -260,6 +276,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Activation code has been sent to your email/phone",
@@ -277,11 +294,13 @@ Authorization: Bearer {access_token}
 **Endpoint:** `GET /api/auth/profile/`
 
 **Request Headers:**
+
 ```
 Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "id": 1,
@@ -310,6 +329,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `PUT /api/auth/settings/profile/`
 
 **Request Body:**
+
 ```json
 {
   "first_name": "John",
@@ -319,6 +339,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Profile updated successfully",
@@ -338,6 +359,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `PUT /api/auth/settings/preferences/`
 
 **Request Body:**
+
 ```json
 {
   "timezone": "Africa/Dar_es_Salaam"
@@ -345,6 +367,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Preferences updated successfully",
@@ -359,6 +382,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `PUT /api/auth/settings/notifications/`
 
 **Request Body:**
+
 ```json
 {
   "email_notifications": true,
@@ -367,6 +391,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Notification settings updated successfully",
@@ -382,6 +407,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/password/change/`
 
 **Request Body:**
+
 ```json
 {
   "old_password": "OldPassword123!",
@@ -391,6 +417,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Password changed successfully"
@@ -404,6 +431,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/forgot-password/`
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com"
@@ -411,6 +439,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Password reset email has been sent"
@@ -424,6 +453,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/password/reset/`
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com"
@@ -431,6 +461,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Password reset email has been sent to your email address"
@@ -444,6 +475,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/password/reset/confirm/`
 
 **Request Body:**
+
 ```json
 {
   "token": "reset_token_here",
@@ -453,6 +485,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "message": "Password reset successfully"
@@ -468,6 +501,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/sms/send-code/`
 
 **Request Body:**
+
 ```json
 {
   "phone_number": "+255614853618",
@@ -476,6 +510,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -492,6 +527,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/sms/verify-code/`
 
 **Request Body:**
+
 ```json
 {
   "phone_number": "+255614853618",
@@ -500,6 +536,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -510,6 +547,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Error Response (400):**
+
 ```json
 {
   "success": false,
@@ -526,6 +564,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/sms/forgot-password/`
 
 **Request Body:**
+
 ```json
 {
   "phone_number": "+255614853618"
@@ -533,6 +572,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -548,6 +588,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/sms/reset-password/`
 
 **Request Body:**
+
 ```json
 {
   "phone_number": "+255614853618",
@@ -558,6 +599,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -572,6 +614,7 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/auth/sms/confirm-account/`
 
 **Request Body:**
+
 ```json
 {
   "verification_code": "123456"
@@ -579,6 +622,7 @@ Authorization: Bearer {access_token}
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -602,12 +646,14 @@ Authorization: Bearer {access_token}
 **Endpoint:** `POST /api/messaging/sms/send/`
 
 **Request Headers:**
+
 ```
 Authorization: Bearer {access_token}
 Content-Type: application/json
 ```
 
 **Request Body:**
+
 ```json
 {
   "recipient": "+255614853618",
@@ -617,6 +663,7 @@ Content-Type: application/json
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -635,6 +682,7 @@ Content-Type: application/json
 ```
 
 **Error Response (402) - Insufficient Credits:**
+
 ```json
 {
   "success": false,
@@ -652,6 +700,7 @@ Content-Type: application/json
 **Endpoint:** `GET /api/messaging/sms/balance/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -670,6 +719,7 @@ Content-Type: application/json
 **Endpoint:** `GET /api/messaging/sms/stats/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -695,6 +745,7 @@ Content-Type: application/json
 **Endpoint:** `GET /api/messaging/sms/{message_id}/status/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -719,6 +770,7 @@ Content-Type: application/json
 **Endpoint:** `POST /api/messaging/sms/validate-phone/`
 
 **Request Body:**
+
 ```json
 {
   "phone_number": "+255614853618"
@@ -726,6 +778,7 @@ Content-Type: application/json
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -743,6 +796,7 @@ Content-Type: application/json
 **Endpoint:** `POST /api/messaging/sms/quick/`
 
 **Request Body:**
+
 ```json
 {
   "recipients": ["+255614853618", "+255712345678"],
@@ -752,6 +806,7 @@ Content-Type: application/json
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -774,12 +829,14 @@ Content-Type: application/json
 **Endpoint:** `GET /api/messaging/contacts/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `search` (string): Search term
 - `tags` (string): Filter by tags (comma-separated)
 
 **Success Response (200):**
+
 ```json
 {
   "count": 150,
@@ -810,6 +867,7 @@ Content-Type: application/json
 **Endpoint:** `POST /api/messaging/contacts/`
 
 **Request Body:**
+
 ```json
 {
   "name": "John Doe",
@@ -824,6 +882,7 @@ Content-Type: application/json
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -850,6 +909,7 @@ Content-Type: application/json
 **Endpoint:** `GET /api/messaging/contacts/{contact_id}/`
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -876,6 +936,7 @@ Content-Type: application/json
 **Endpoint:** `PUT /api/messaging/contacts/{contact_id}/`
 
 **Request Body:**
+
 ```json
 {
   "name": "John Doe Updated",
@@ -885,6 +946,7 @@ Content-Type: application/json
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -903,6 +965,7 @@ Content-Type: application/json
 **Endpoint:** `DELETE /api/messaging/contacts/{contact_id}/`
 
 **Success Response (204):**
+
 ```
 No Content
 ```
@@ -914,12 +977,14 @@ No Content
 **Endpoint:** `POST /api/messaging/contacts/bulk-import/`
 
 **Request Body (Form Data):**
+
 ```
 file: [CSV/Excel file]
 tags: "VIP,Customer"
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -942,6 +1007,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/contacts/bulk-delete/`
 
 **Request Body:**
+
 ```json
 {
   "contact_ids": [
@@ -952,6 +1018,7 @@ tags: "VIP,Customer"
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -967,6 +1034,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/contacts/{contact_id}/opt-in/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -982,6 +1050,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/contacts/{contact_id}/opt-out/`
 
 **Request Body:**
+
 ```json
 {
   "reason": "No longer interested"
@@ -989,6 +1058,7 @@ tags: "VIP,Customer"
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1006,12 +1076,14 @@ tags: "VIP,Customer"
 **Endpoint:** `GET /api/messaging/campaigns/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `status` (string): Filter by status
 - `search` (string): Search term
 
 **Success Response (200):**
+
 ```json
 {
   "count": 25,
@@ -1042,6 +1114,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/campaigns/`
 
 **Request Body:**
+
 ```json
 {
   "name": "Holiday Promotion",
@@ -1058,6 +1131,7 @@ tags: "VIP,Customer"
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1081,6 +1155,7 @@ tags: "VIP,Customer"
 **Endpoint:** `GET /api/messaging/campaigns/{campaign_id}/`
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1108,6 +1183,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/campaigns/{campaign_id}/start/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1127,6 +1203,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/campaigns/{campaign_id}/pause/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1145,6 +1222,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/campaigns/{campaign_id}/cancel/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1163,6 +1241,7 @@ tags: "VIP,Customer"
 **Endpoint:** `GET /api/messaging/campaigns/{campaign_id}/analytics/`
 
 **Success Response (200):**
+
 ```json
 {
   "campaign_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1189,6 +1268,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/campaigns/{campaign_id}/duplicate/`
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -1210,12 +1290,14 @@ tags: "VIP,Customer"
 **Endpoint:** `GET /api/messaging/templates/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `category` (string): Filter by category
 - `search` (string): Search term
 
 **Success Response (200):**
+
 ```json
 {
   "count": 50,
@@ -1245,6 +1327,7 @@ tags: "VIP,Customer"
 **Endpoint:** `POST /api/messaging/templates/`
 
 **Request Body:**
+
 ```json
 {
   "name": "Welcome Message",
@@ -1256,6 +1339,7 @@ tags: "VIP,Customer"
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1278,6 +1362,7 @@ tags: "VIP,Customer"
 **Endpoint:** `GET /api/messaging/templates/{template_id}/`
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1300,6 +1385,7 @@ tags: "VIP,Customer"
 **Endpoint:** `PUT /api/messaging/templates/{template_id}/`
 
 **Request Body:**
+
 ```json
 {
   "name": "Welcome Message Updated",
@@ -1308,6 +1394,7 @@ tags: "VIP,Customer"
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1324,6 +1411,7 @@ tags: "VIP,Customer"
 **Endpoint:** `DELETE /api/messaging/templates/{template_id}/`
 
 **Success Response (204):**
+
 ```
 No Content
 ```
@@ -1335,6 +1423,7 @@ No Content
 **Endpoint:** `POST /api/messaging/templates/{template_id}/toggle-favorite/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1350,6 +1439,7 @@ No Content
 **Endpoint:** `GET /api/messaging/templates/{template_id}/variables/`
 
 **Success Response (200):**
+
 ```json
 {
   "template_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1373,6 +1463,7 @@ No Content
 **Endpoint:** `GET /api/billing/sms/packages/`
 
 **Success Response (200):**
+
 ```json
 {
   "count": 5,
@@ -1408,6 +1499,7 @@ No Content
 **Endpoint:** `GET /api/billing/sms/balance/`
 
 **Success Response (200):**
+
 ```json
 {
   "balance": {
@@ -1429,6 +1521,7 @@ No Content
 **Endpoint:** `POST /api/billing/sms/purchase/`
 
 **Request Body:**
+
 ```json
 {
   "package_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1438,6 +1531,7 @@ No Content
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -1461,11 +1555,13 @@ No Content
 **Endpoint:** `GET /api/billing/sms/purchases/history/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `status` (string): Filter by status
 
 **Success Response (200):**
+
 ```json
 {
   "count": 10,
@@ -1492,6 +1588,7 @@ No Content
 **Endpoint:** `POST /api/billing/payments/initiate/`
 
 **Request Body:**
+
 ```json
 {
   "amount": 50.00,
@@ -1503,6 +1600,7 @@ No Content
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -1525,6 +1623,7 @@ No Content
 **Endpoint:** `GET /api/billing/payments/transactions/{transaction_id}/status/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1546,6 +1645,7 @@ No Content
 **Endpoint:** `GET /api/billing/payments/providers/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1575,11 +1675,13 @@ No Content
 **Endpoint:** `GET /api/billing/history/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `type` (string): Filter by type (purchase, payment, usage)
 
 **Success Response (200):**
+
 ```json
 {
   "count": 50,
@@ -1617,6 +1719,7 @@ No Content
 **Endpoint:** `GET /api/tenants/`
 
 **Success Response (200):**
+
 ```json
 {
   "count": 1,
@@ -1643,6 +1746,7 @@ No Content
 **Endpoint:** `POST /api/tenants/switch/`
 
 **Request Body:**
+
 ```json
 {
   "tenant_id": "550e8400-e29b-41d4-a716-446655440000"
@@ -1650,6 +1754,7 @@ No Content
 ```
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1668,6 +1773,7 @@ No Content
 **Endpoint:** `GET /api/tenants/{tenant_id}/team/`
 
 **Success Response (200):**
+
 ```json
 {
   "count": 5,
@@ -1695,6 +1801,7 @@ No Content
 **Endpoint:** `POST /api/tenants/{tenant_id}/team/invite/`
 
 **Request Body:**
+
 ```json
 {
   "email": "newmember@example.com",
@@ -1703,6 +1810,7 @@ No Content
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -1726,11 +1834,13 @@ No Content
 **Endpoint:** `GET /api/notifications/`
 
 **Query Parameters:**
+
 - `page` (integer): Page number
 - `page_size` (integer): Items per page
 - `unread_only` (boolean): Filter unread only
 
 **Success Response (200):**
+
 ```json
 {
   "count": 25,
@@ -1756,6 +1866,7 @@ No Content
 **Endpoint:** `POST /api/notifications/{notification_id}/mark-read/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1774,6 +1885,7 @@ No Content
 **Endpoint:** `POST /api/notifications/mark-all-read/`
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -1789,6 +1901,7 @@ No Content
 **Endpoint:** `GET /api/notifications/unread-count/`
 
 **Success Response (200):**
+
 ```json
 {
   "unread_count": 5
@@ -1804,6 +1917,7 @@ No Content
 **Endpoint:** `GET /api/messaging/sender-ids/`
 
 **Success Response (200):**
+
 ```json
 {
   "count": 3,
@@ -1833,6 +1947,7 @@ No Content
 **Endpoint:** `POST /api/messaging/sender-ids/request/`
 
 **Request Body:**
+
 ```json
 {
   "sender_id": "MYBIZ",
@@ -1841,6 +1956,7 @@ No Content
 ```
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -1861,6 +1977,7 @@ No Content
 **Endpoint:** `GET /api/messaging/sender-ids/{sender_id}/status/`
 
 **Success Response (200):**
+
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
@@ -1880,6 +1997,7 @@ No Content
 **Endpoint:** `GET /api/messaging/dashboard/overview/`
 
 **Success Response (200):**
+
 ```json
 {
   "stats": {
@@ -1908,9 +2026,11 @@ No Content
 **Endpoint:** `GET /api/messaging/dashboard/metrics/`
 
 **Query Parameters:**
+
 - `period` (string): Time period (7d, 30d, 90d, 1y)
 
 **Success Response (200):**
+
 ```json
 {
   "period": "30d",
@@ -1940,10 +2060,12 @@ No Content
 **Endpoint:** `GET /api/messaging/analytics/overview/`
 
 **Query Parameters:**
+
 - `start_date` (date): Start date
 - `end_date` (date): End date
 
 **Success Response (200):**
+
 ```json
 {
   "period": {
@@ -1981,9 +2103,11 @@ No Content
 **Endpoint:** `GET /api/messaging/activity/recent/`
 
 **Query Parameters:**
+
 - `limit` (integer): Number of activities (default: 20)
 
 **Success Response (200):**
+
 ```json
 {
   "count": 20,
@@ -2048,6 +2172,7 @@ All error responses follow this format:
 ### Common Error Responses
 
 **401 Unauthorized:**
+
 ```json
 {
   "detail": "Authentication credentials were not provided."
@@ -2055,6 +2180,7 @@ All error responses follow this format:
 ```
 
 **403 Forbidden:**
+
 ```json
 {
   "detail": "You do not have permission to perform this action."
@@ -2062,6 +2188,7 @@ All error responses follow this format:
 ```
 
 **404 Not Found:**
+
 ```json
 {
   "error": "Not found",
@@ -2070,6 +2197,7 @@ All error responses follow this format:
 ```
 
 **400 Validation Error:**
+
 ```json
 {
   "field_name": [
@@ -2083,6 +2211,7 @@ All error responses follow this format:
 ```
 
 **402 Payment Required:**
+
 ```json
 {
   "error": "Insufficient credits",
@@ -2109,6 +2238,7 @@ The access token is obtained from the login endpoint and should be included in a
 ## Rate Limiting
 
 API requests are rate-limited to prevent abuse:
+
 - **Authenticated requests**: 1000 requests per hour
 - **Unauthenticated requests**: 100 requests per hour
 
@@ -2125,6 +2255,7 @@ X-RateLimit-Reset: 1638000000
 ## Pagination
 
 List endpoints support pagination with the following query parameters:
+
 - `page` (integer): Page number (default: 1)
 - `page_size` (integer): Items per page (default: 20, max: 100)
 
@@ -2150,6 +2281,7 @@ All dates are returned in ISO 8601 format:
 ```
 
 When sending dates in requests, use the same format or:
+
 - Date only: `2025-11-27`
 - Date and time: `2025-11-27T10:30:00Z`
 
@@ -2170,13 +2302,11 @@ The API will attempt to normalize phone numbers, but it's recommended to send th
 
 For API support, contact:
 
-- **Email**: api@mifumo.com
+- **Email**: [api@mifumo.com](mailto:api@mifumo.com)
 - **Documentation**: https://docs.mifumo.com
 - **Status Page**: https://status.mifumo.com
 
 ---
 
-**Last Updated**: November 2025  
+**Last Updated**: November 2025\
 **API Version**: 1.0
-
-
