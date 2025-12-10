@@ -1,18 +1,51 @@
----
+<style>{`
+  html, body { font-size: 15px; }
+  h1 { font-size: 1.9rem; margin: 0 0 6px 0; line-height: 1.2; }
+  h2 { font-size: 1.35rem; margin: 10px 0 6px 0; line-height: 1.25; }
+  h3 { font-size: 1.2rem; margin: 8px 0 4px 0; }
+  p, li { font-size: 0.95rem; line-height: 1.5; margin: 6px 0; }
+  /* Navbar logo text next to the icon (force visible) */
+  header a[data-testid="navbar-logo"],
+  header a[href="/"],
+  header nav a:first-of-type {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+  header a[data-testid="navbar-logo"]::after,
+  header a[href="/"]::after,
+  header nav a:first-of-type::after {
+    content: "Mifumo SMS API";
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: currentColor;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+  .hero { display: flex; align-items: center; gap: 12px; margin: -20px 0 8px 0; padding: 0; }
+  .hero img { width: 56px; height: 56px; flex-shrink: 0; object-fit: contain; }
+  .hero-title { margin: 0; font-size: 1.9rem; font-weight: 700; line-height: 1.15; }
+  .hero-sub { margin: 2px 0 0 0; font-size: 0.95rem; color: #555; font-weight: 400; }
+  .section { margin: 16px 0 12px 0; }
+  .quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+  @media (max-width: 768px) {
+    html, body { font-size: 14px; }
+    .hero { flex-direction: column; align-items: flex-start; margin: -12px 0 8px 0; gap: 10px; }
+    .hero img { width: 48px; height: 48px; }
+    .hero-title { font-size: 1.75rem; }
+    .hero-sub { font-size: 0.92rem; }
+    .quick-grid { gap: 10px; }
+  }
+`}</style>
 
----
-
-<div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px', padding: '20px 0' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-    <img src="/logo/light.png" alt="Mifumo SMS API Logo" style={{ width: '80px', height: '80px', flexShrink: 0 }} />
-
-  </div>
+<div className="hero" style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '-20px 0 8px 0', padding: 0 }}>
+  <img src="/logo/light.png" alt="Mifumo SMS API Logo" style={{ width: '56px', height: '56px', flexShrink: 0, objectFit: 'contain' }} />
   <div>
-    <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 'bold', lineHeight: '1.2' }}>Mifumo SMS API</h1>
-    <p style={{ margin: '8px 0 0 0', fontSize: '1.2rem', color: '#666', fontWeight: '400' }}>Complete API documentation for Mifumo SMS platform</p>
+    <h1 className="hero-title" style={{ margin: 0, fontSize: '1.9rem', fontWeight: 700, lineHeight: 1.15 }}>Mifumo SMS API</h1>
+    <p className="hero-sub" style={{ margin: '2px 0 0 0', fontSize: '0.95rem', color: '#555', fontWeight: 400 }}>Complete API documentation for Mifumo SMS platform</p>
   </div>
 </div>
-
 ## Welcome to Mifumo SMS API Documentation
 
 Build powerful SMS messaging solutions with our comprehensive REST API. Send messages, manage contacts, create campaigns, and more.
@@ -28,50 +61,26 @@ Build powerful SMS messaging solutions with our comprehensive REST API. Send mes
 
 ## Quick Links
 
-<Columns cols={2}>
-  <Card
-    title="Authentication"
-    icon="key"
-    href="/api-reference/authentication/login"
-  >
+<div className="quick-grid">
+  <Card title="Authentication" icon="key" href="/api-reference/authentication/login">
     Learn how to authenticate and manage tokens
   </Card>
-  <Card
-    title="Send SMS"
-    icon="message"
-    href="/api-reference/sms-operations/send-sms"
-  >
+  <Card title="Send SMS" icon="message" href="/api-reference/sms-operations/send-sms">
     Send SMS messages to any phone number
   </Card>
-  <Card
-    title="Manage Contacts"
-    icon="users"
-    href="/api-reference/contact-management/list-contacts"
-  >
+  <Card title="Manage Contacts" icon="users" href="/api-reference/contact-management/list-contacts">
     Create and manage your contact lists
   </Card>
-  <Card
-    title="Campaigns"
-    icon="megaphone"
-    href="/api-reference/campaign-management/list-campaigns"
-  >
+  <Card title="Campaigns" icon="megaphone" href="/api-reference/campaign-management/list-campaigns">
     Create and manage SMS campaigns
   </Card>
-  <Card
-    title="Templates"
-    icon="file-text"
-    href="/api-reference/template-management/list-templates"
-  >
+  <Card title="Templates" icon="file-text" href="/api-reference/template-management/list-templates">
     Use templates for consistent messaging
   </Card>
-  <Card
-    title="Billing"
-    icon="credit-card"
-    href="/api-reference/billing-payments/sms-packages"
-  >
+  <Card title="Billing" icon="credit-card" href="/api-reference/billing-payments/sms-packages">
     Purchase SMS packages and manage payments
   </Card>
-</Columns>
+</div>
 
 ## API Overview
 
