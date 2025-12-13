@@ -1,0 +1,49 @@
+/* Custom header styles */
+
+/* Style the custom logo container */
+.custom-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Ensure logo and text have consistent styling */
+.custom-logo-container img {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+}
+
+.custom-logo-container span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+
+/* Ensure proper spacing in the navbar */
+#navbar .flex.items-center.gap-x-4 {
+    position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .custom-logo-container {
+        margin-left: 0.25rem;
+        gap: 0.25rem;
+    }
+
+    .custom-logo-container img {
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .custom-logo-container {
+        display: none;
+        /* Hide logo on very small screens */
+    }
+}
