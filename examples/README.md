@@ -145,7 +145,6 @@ Rate limit headers are included in responses:
 ## Support
 
 For API support, contact:
-- **Email**: api@mifumo.com
-- **Documentation**: https://docs.mifumo.com
-- **Status Page**: https://status.mifumo.com
+- **Email**: support@mifumolabs.com
+- **Documentation**: https://docs-sms.mifumolabs.com
 

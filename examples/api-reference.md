@@ -2,8 +2,8 @@
 
 This document provides a comprehensive reference for all Mifumo SMS API endpoints.
 
-**Base URL:** `https://mifumosms.mifumolabs.com/api/`  
-**API Version:** 1.0  
+**Base URL:** `https://mifumosms.mifumolabs.com/api/`
+**API Version:** 1.0
 **Authentication:** JWT Bearer Token
 
 ## Quick Links
@@ -386,13 +386,12 @@ Phone numbers should be in E.164 format:
 
 ## Support
 
-- **Email**: api@mifumo.com
-- **Documentation**: https://docs.mifumo.com
-- **Status Page**: https://status.mifumo.com
+- **Email**: support@mifumolabs.com
+- **Documentation**: https://docs-sms.mifumolabs.com
 
 ---
 
-**Last Updated**: November 2025  
+**Last Updated**: November 2025
 **API Version**: 1.0
 
 

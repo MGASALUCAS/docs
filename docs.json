@@ -162,11 +162,11 @@
         "component": "Navbar",
         "links": [{
                 "label": "Support",
-                "href": "mailto:api@mifumo.com"
+                "href": "mailto:support@mifumolabs.com"
             },
             {
                 "label": "Documentation",
-                "href": "https://docs.mifumo.com"
+                "href": "https://docs-sms.mifumolabs.com"
             }
         ]
     },

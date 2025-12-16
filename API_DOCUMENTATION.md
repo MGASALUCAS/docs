@@ -4,8 +4,8 @@
 
 This is a comprehensive API documentation for frontend developers. It includes all endpoints with complete JSON request/response examples.
 
-**Base URL:** `https://mifumosms.mifumolabs.com/api/`  
-**API Version:** 1.0  
+**Base URL:** `https://mifumosms.mifumolabs.com/api/`
+**API Version:** 1.0
 **Authentication:** JWT Bearer Token
 
 ---
@@ -2170,13 +2170,12 @@ The API will attempt to normalize phone numbers, but it's recommended to send th
 
 For API support, contact:
 
-- **Email**: api@mifumo.com
-- **Documentation**: https://docs.mifumo.com
-- **Status Page**: https://status.mifumo.com
+- **Email**: support@mifumolabs.com
+- **Documentation**: https://docs-sms.mifumolabs.com
 
 ---
 
-**Last Updated**: November 2025  
+**Last Updated**: November 2025
 **API Version**: 1.0
 
 
