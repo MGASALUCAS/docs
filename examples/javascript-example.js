@@ -1,172 +1,40 @@
 /**
- * Mifumo SMS API - JavaScript Example
+ * Mifumo SMS API v2.0 - JavaScript Example
  *
- * This example demonstrates how to use the Mifumo SMS API with JavaScript/Node.js
+ * This example demonstrates how to use the Mifumo SMS API v2.0 with JavaScript/Node.js
  */
 
-const BASE_URL = 'https://mifumosms.mifumolabs.com/api';
-
-// Store tokens
-let accessToken = null;
-let refreshToken = null;
+const BASE_URL = 'https://mifumosms.mifumolabs.com';
+const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
 
 /**
- * Register a new user
+ * Send SMS using the Core SMS API
  */
-async function registerUser(userData) {
+async function sendSMS(message, recipients, senderId, tenantAccountId = null) {
   try {
-    const response = await fetch(`${BASE_URL}/auth/register/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: userData.email,
-        first_name: userData.firstName,
-        last_name: userData.lastName,
-        phone_number: userData.phoneNumber,
-        password: userData.password,
-        password_confirm: userData.passwordConfirm,
-        timezone: userData.timezone || 'Africa/Dar_es_Salaam',
-        business_name: userData.businessName,
-        company_name: userData.companyName,
-        subdomain: userData.subdomain,
-        country: userData.country || 'Tanzania',
-      }),
-    });
+    const requestBody = {
+      message,
+      recipients,
+      sender_id: senderId,
+    };
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(JSON.stringify(data));
+    // Add tenant_account_id for white-label mode
+    if (tenantAccountId) {
+      requestBody.tenant_account_id = tenantAccountId;
     }
 
-    console.log('Registration successful:', data);
-    return data;
-  } catch (error) {
-    console.error('Registration error:', error);
-    throw error;
-  }
-}
-
-/**
- * Login and get access tokens
- */
-async function login(email, password) {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/login/`, {
+    const response = await fetch(`${BASE_URL}/api/integration/v1/sms/send/`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(JSON.stringify(data));
-    }
-
-    accessToken = data.tokens.access;
-    refreshToken = data.tokens.refresh;
-
-    console.log('Login successful');
-    return data;
-  } catch (error) {
-    console.error('Login error:', error);
-    throw error;
-  }
-}
-
-/**
- * Refresh access token
- */
-async function refreshAccessToken() {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/token/refresh/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        refresh: refreshToken,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error('Token refresh failed');
-    }
-
-    accessToken = data.access;
-    console.log('Token refreshed');
-    return data;
-  } catch (error) {
-    console.error('Token refresh error:', error);
-    throw error;
-  }
-}
-
-/**
- * Get authenticated user profile
- */
-async function getProfile() {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/profile/`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      if (response.status === 401) {
-        // Try to refresh token
-        await refreshAccessToken();
-        return getProfile();
-      }
-      throw new Error(JSON.stringify(data));
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Get profile error:', error);
-    throw error;
-  }
-}
-
-/**
- * Send SMS
- */
-async function sendSMS(recipient, message, senderId) {
-  try {
-    const response = await fetch(`${BASE_URL}/messaging/sms/send/`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        recipient,
-        message,
-        sender_id: senderId,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      if (response.status === 402) {
-        console.error('Insufficient credits:', data);
-      }
       throw new Error(JSON.stringify(data));
     }
 
@@ -174,6 +42,128 @@ async function sendSMS(recipient, message, senderId) {
     return data;
   } catch (error) {
     console.error('Send SMS error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Check SMS message status
+ */
+async function checkMessageStatus(messageId) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/integration/v1/sms/status/${messageId}/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(JSON.stringify(data));
+    }
+
+    console.log('Message status:', data);
+    return data;
+  } catch (error) {
+    console.error('Check status error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get SMS balance
+ */
+async function getSMSBalance() {
+  try {
+    const response = await fetch(`${BASE_URL}/api/integration/v1/sms/balance/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(JSON.stringify(data));
+    }
+
+    console.log('SMS Balance:', data);
+    return data;
+  } catch (error) {
+    console.error('Get balance error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Create a tenant account (White-Label API)
+ */
+async function createTenant(tenantData) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/integration/v1/partner/tenants/create/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tenant_name: tenantData.tenantName,
+        owner_email: tenantData.ownerEmail,
+        owner_name: tenantData.ownerName,
+        contact_phone: tenantData.contactPhone,
+        initial_credits: tenantData.initialCredits || 0,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(JSON.stringify(data));
+    }
+
+    console.log('Tenant created successfully:', data);
+    return data;
+  } catch (error) {
+    console.error('Create tenant error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Initiate payment for tenant (ZenoPay Mobile Money)
+ */
+async function initiateTenantPayment(tenantId, paymentData) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/integration/v1/partner/tenants/${tenantId}/payments/initiate/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        package_id: paymentData.packageId,
+        buyer_email: paymentData.buyerEmail,
+        buyer_name: paymentData.buyerName,
+        buyer_phone: paymentData.buyerPhone,
+        mobile_money_provider: paymentData.mobileMoneyProvider,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(JSON.stringify(data));
+    }
+
+    console.log('Payment initiated:', data);
+    return data;
+  } catch (error) {
+    console.error('Payment initiation error:', error);
     throw error;
   }
 }
@@ -337,35 +327,47 @@ async function getDashboardOverview() {
 // Example usage
 async function main() {
   try {
-    // Login
-    await login('user@example.com', 'SecurePassword123!');
-
-    // Get profile
-    const profile = await getProfile();
-    console.log('Profile:', profile);
-
-    // Get balance
+    // Get SMS balance
     const balance = await getSMSBalance();
-    console.log('Balance:', balance);
+    console.log('Current Balance:', balance);
 
     // Send SMS
-    await sendSMS('+255614853618', 'Hello from Mifumo SMS API!', 'MIFUMO');
+    const smsResult = await sendSMS(
+      'Hello from Mifumo SMS API v2.0!',
+      ['+255614853618'],
+      'QUANTUM'
+    );
+    console.log('SMS Result:', smsResult);
 
-    // List contacts
-    const contacts = await listContacts(1, 20);
-    console.log('Contacts:', contacts);
+    // Check message status
+    if (smsResult.success && smsResult.message_id) {
+      setTimeout(async () => {
+        const status = await checkMessageStatus(smsResult.message_id);
+        console.log('Message Status:', status);
+      }, 5000); // Check after 5 seconds
+    }
 
-    // Create contact
-    await createContact({
-      name: 'John Doe',
-      phoneE164: '+255712345678',
-      email: 'john@example.com',
-      tags: ['VIP', 'Customer'],
+    // Create a tenant account (White-Label)
+    const tenant = await createTenant({
+      tenantName: 'Restaurant Chain A',
+      ownerEmail: 'owner@restaurant.com',
+      ownerName: 'John Doe',
+      contactPhone: '+255123456789',
+      initialCredits: 0,
     });
+    console.log('Tenant Created:', tenant);
 
-    // Get dashboard
-    const dashboard = await getDashboardOverview();
-    console.log('Dashboard:', dashboard);
+    // Initiate payment for tenant
+    if (tenant.success && tenant.data.mifumo_account_id) {
+      const payment = await initiateTenantPayment(tenant.data.mifumo_account_id, {
+        packageId: 'uuid-of-starter-package', // Get from list packages endpoint
+        buyerEmail: 'buyer@restaurant.com',
+        buyerName: 'Jane Smith',
+        buyerPhone: '0614853618',
+        mobileMoneyProvider: 'vodacom',
+      });
+      console.log('Payment Initiated:', payment);
+    }
 
   } catch (error) {
     console.error('Error:', error);
@@ -375,16 +377,11 @@ async function main() {
 // Export functions for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
-    registerUser,
-    login,
-    refreshAccessToken,
-    getProfile,
     sendSMS,
+    checkMessageStatus,
     getSMSBalance,
-    listContacts,
-    createContact,
-    createCampaign,
-    getDashboardOverview,
+    createTenant,
+    initiateTenantPayment,
   };
 }
 

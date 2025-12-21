@@ -1,37 +1,450 @@
-# Mifumo SMS - Complete Frontend API Documentation
+# Mifumo SMS API Documentation
 
-## Overview
-
-This is a comprehensive API documentation for frontend developers. It includes all endpoints with complete JSON request/response examples.
-
-**Base URL:** `https://mifumosms.mifumolabs.com/api/`
-**API Version:** 1.0
-**Authentication:** JWT Bearer Token
-
----
+Version: 2.0
+Base URL: https://mifumosms.mifumolabs.com
 
 ## Table of Contents
 
-1. [Authentication](#authentication)
-2. [User Management](#user-management)
-3. [SMS Operations](#sms-operations)
-4. [Contact Management](#contact-management)
-5. [Campaign Management](#campaign-management)
-6. [Template Management](#template-management)
-7. [Billing & Payments](#billing--payments)
-8. [Tenant Management](#tenant-management)
-9. [Notifications](#notifications)
-10. [Sender ID Management](#sender-id-management)
-11. [Dashboard & Analytics](#dashboard--analytics)
-12. [Error Handling](#error-handling)
+1. [Quick Start](#quick-start)
+2. [Authentication](#authentication)
+3. [Core SMS API](#core-sms-api)
+4. [White-Label / Partner API](#white-label--partner-api)
+5. [Payment Integration](#payment-integration)
+6. [Error Handling](#error-handling)
+7. [Code Examples](#code-examples)
 
----
+## Quick Start
+
+### Get Your API Key
+
+1. Register at https://mifumosms.mifumolabs.com
+2. Login to your account
+3. Navigate to API Settings → Generate API Key
+
+### Base URL Structure
+
+Base URL: https://mifumosms.mifumolabs.com
+
+API Paths:
+- External SMS API: /api/integration/v1/
+- Authentication: /api/auth/
+- Messaging: /api/messaging/
+- Billing: /api/billing/
+- White-Label API: /api/integration/v1/partner/
+
+### Example Request
+
+```bash
+curl -X POST https://mifumosms.mifumolabs.com/api/integration/v1/sms/send/ \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+"message": "Hello from Mifumo SMS",
+"recipients": ["+255614853618"],
+"sender_id": "Quantum"
+}'
+```
 
 ## Authentication
 
-### Register User
+### API Key (Recommended)
 
-**Endpoint:** `POST /api/auth/register/`
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+or
+
+```
+X-API-Key: YOUR_API_KEY
+```
+
+### JWT Token (Web Applications)
+
+1. Login: POST /api/auth/login/
+2. Use access_token in Authorization header
+
+## Core SMS API
+
+### Send SMS
+
+**POST /api/integration/v1/sms/send/**
+
+Send SMS to one or more recipients.
+
+**Request:**
+```json
+{
+"message": "Your message here",
+"recipients": ["+255614853618", "+255614853619"],
+"sender_id": "YourBrand",
+"tenant_account_id": "uuid-optional-for-white-label"
+}
+```
+
+**Response:**
+```json
+{
+"success": true,
+"message_id": "uuid-here",
+"status": "sent"
+}
+```
+
+**White-Label Mode:** Include tenant_account_id (use mifumo_account_id from tenant creation) to send on behalf of tenant. Credits deducted from tenant's account.
+
+### Check Message Status
+
+**GET /api/integration/v1/sms/status/{message_id}/**
+
+**Response:**
+```json
+{
+"message_id": "uuid-here",
+"status": "delivered",
+"delivered_at": "2024-01-15T10:30:00Z"
+}
+```
+
+### Get SMS Balance
+
+**GET /api/integration/v1/sms/balance/**
+
+**Response:**
+```json
+{
+"balance": 1000,
+"currency": "credits"
+}
+```
+
+### Get Delivery Reports
+
+**GET /api/integration/v1/sms/delivery-reports/**
+
+Query Parameters:
+- limit (optional): Number of records (default: 50)
+- offset (optional): Pagination offset
+
+## White-Label / Partner API
+
+### Overview
+
+Manage tenant accounts programmatically using your Customer API key. Tenants use your API key for all operations and do not have their own Mifumo SMS accounts.
+
+**Architecture:**
+- Customer: Has Mifumo SMS account and API key
+- Tenant: Uses Customer's API key, no own account
+- Payment: ZenoPay Mobile Money Integration (direct to Mifumo SMS)
+
+### Create Tenant Account
+
+**POST /api/integration/v1/partner/tenants/create/**
+
+**Request:**
+```json
+{
+"tenant_name": "Customer Company Name",
+"owner_email": "customer@example.com",
+"owner_name": "John Doe",
+"contact_phone": "+255123456789",
+"initial_credits": 0
+}
+```
+
+**Response:**
+```json
+{
+"success": true,
+"data": {
+"mifumo_account_id": "a5245ef6-def7-4731-8c20-e89ef53aa65e",
+"mifumo_account_id_public": "YCKWLWXX45W_TIAT1Y6BPW",
+"mifumo_api_key": null,
+"tenant_name": "Restaurant Chain A",
+"tenant_id": "ec0a5041-65df-429e-8de5-3e2ac51ef332",
+"sms_balance": 0,
+"owner_email": "restaurant@example.com",
+"created_at": "2025-12-20T11:35:48.898725+00:00"
+}
+}
+```
+
+**Important:** Save mifumo_account_id - use it as tenant_account_id in all tenant operations.
+
+### Get Tenant Account
+
+**GET /api/integration/v1/partner/tenants/{tenant_id}/**
+
+Get tenant account details including balance.
+
+Path Parameter:
+- tenant_id: mifumo_account_id from tenant creation response
+
+### Request Sender ID for Tenant
+
+**POST /api/integration/v1/partner/tenants/{tenant_id}/sender-ids/request/**
+
+**Request:**
+```json
+{
+"sender_id": "MYBRAND",
+"use_case": "Marketing messages for our brand"
+}
+```
+
+**Response:**
+```json
+{
+"success": true,
+"data": {
+"request_id": "uuid-here",
+"sender_id": "MYBRAND",
+"status": "pending",
+"tenant_id": "a5245ef6-def7-4731-8c20-e89ef53aa65e",
+"created_at": "2025-12-20T12:00:00Z"
+}
+}
+```
+
+### Get Tenant Sender ID Requests
+
+**GET /api/integration/v1/partner/tenants/{tenant_id}/sender-ids/requests/**
+
+Query Parameters:
+- status (optional): Filter by status (pending, approved, rejected)
+
+## Payment Integration
+
+### Payment Method: ZenoPay Mobile Money
+
+All tenant payments use ZenoPay Mobile Money Integration. Payments go directly to Mifumo SMS. Tenants receive payment instructions on their phone and pay via mobile money. Credits are automatically added when payment completes.
+
+**Supported Providers:** vodacom, tigo, airtel, halotel
+
+### List SMS Packages
+
+**GET /api/integration/v1/partner/packages/**
+
+**Response:**
+```json
+{
+"success": true,
+"data": [
+{
+"id": "uuid-here",
+"name": "Starter Package",
+"credits": 1000,
+"price": 18000,
+"currency": "TZS",
+"unit_price": 18.00
+}
+]
+}
+```
+
+### Initiate Payment for Tenant
+
+**POST /api/integration/v1/partner/tenants/{tenant_id}/payments/initiate/**
+
+**Request:**
+```json
+{
+"package_id": "uuid-from-packages-list",
+"buyer_email": "restaurant@example.com",
+"buyer_name": "John Doe",
+"buyer_phone": "0614853618",
+"mobile_money_provider": "vodacom"
+}
+```
+
+**Response:**
+```json
+{
+"success": true,
+"data": {
+"transaction_id": "uuid-here",
+"order_id": "MIFUMO-20251220-ABC12345",
+"amount": 18000,
+"currency": "TZS",
+"status": "pending"
+}
+}
+```
+
+**Workflow:**
+1. Call endpoint → Tenant receives payment instructions
+2. Tenant pays via mobile money → Payment goes to Mifumo SMS
+3. Poll status endpoint → Credits automatically added when completed
+
+### Check Payment Status
+
+**GET /api/integration/v1/partner/tenants/{tenant_id}/payments/{transaction_id}/status/**
+
+**Response:**
+```json
+{
+"success": true,
+"data": {
+"transaction_id": "uuid-here",
+"status": "completed",
+"amount": 18000,
+"currency": "TZS",
+"credits_added": 1000,
+"completed_at": "2025-12-20T12:30:00Z"
+}
+}
+```
+
+**Status Values:** pending, completed, failed, cancelled
+
+### Initiate Custom Payment
+
+**POST /api/integration/v1/partner/tenants/{tenant_id}/payments/custom/initiate/**
+
+Initiate payment for custom SMS credits (minimum 100).
+
+**Request:**
+```json
+{
+"credits": 5000,
+"buyer_email": "restaurant@example.com",
+"buyer_name": "John Doe",
+"buyer_phone": "0614853618",
+"mobile_money_provider": "vodacom"
+}
+```
+
+**Pricing Tiers:**
+- Lite: 1-49,999 SMS at 18.00 TZS/SMS
+- Standard: 50,000-149,999 SMS at 14.00 TZS/SMS
+- Pro: 250,000+ SMS at 12.00 TZS/SMS
+
+### Check Custom Payment Status
+
+**GET /api/integration/v1/partner/tenants/{tenant_id}/payments/custom/{purchase_id}/status/**
+
+### Get Tenant Payment History
+
+**GET /api/integration/v1/partner/tenants/{tenant_id}/payments/history/**
+
+Query Parameters:
+- status (optional): Filter by status
+- limit (optional): Number of records (default: 50, max: 100)
+- offset (optional): Pagination offset
+
+### Calculate SMS Pricing
+
+**POST /api/integration/v1/partner/pricing/calculate/**
+
+**Request:**
+```json
+{
+"credits": 5000
+}
+```
+
+**Response:**
+```json
+{
+"credits": 5000,
+"price": 90000,
+"currency": "TZS",
+"unit_price": 18.00,
+"tier": "Lite"
+}
+```
+
+## Error Handling
+
+### HTTP Status Codes
+
+| Code | Description |
+|------|-------------|
+| 200 | OK - Request successful |
+| 201 | Created - Resource created |
+| 400 | Bad Request - Invalid parameters |
+| 401 | Unauthorized - Invalid authentication |
+| 403 | Forbidden - Insufficient permissions |
+| 404 | Not Found - Resource not found |
+| 429 | Too Many Requests - Rate limit exceeded |
+| 500 | Internal Server Error |
+
+### Error Response Format
+
+```json
+{
+"error": "Error message description",
+"code": "ERROR_CODE",
+"details": {}
+}
+```
+
+## Code Examples
+
+### JavaScript (Fetch)
+
+```javascript
+const response = await
+fetch('https://mifumosms.mifumolabs.com/api/integration/v1/sms/send/', {
+method: 'POST',
+headers: {
+'Authorization': 'Bearer YOUR_API_KEY',
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+message: 'Hello from Mifumo SMS',
+recipients: ['+255614853618'],
+sender_id: 'Quantum'
+})
+});
+const data = await response.json();
+console.log(data);
+```
+
+### Python (Requests)
+
+```python
+import requests
+url = 'https://mifumosms.mifumolabs.com/api/integration/v1/sms/send/'
+headers = {
+'Authorization': 'Bearer YOUR_API_KEY',
+'Content-Type': 'application/json'
+}
+data = {
+'message': 'Hello from Mifumo SMS',
+'recipients': ['+255614853618'],
+'sender_id': 'Quantum'
+}
+response = requests.post(url, json=data, headers=headers)
+print(response.json())
+```
+
+### PHP (cURL)
+
+```php
+$url = 'https://mifumosms.mifumolabs.com/api/integration/v1/sms/send/';
+$data = [
+'message' => 'Hello from Mifumo SMS',
+'recipients' => ['+255614853618'],
+'sender_id' => 'Quantum'
+];
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+'Authorization: Bearer YOUR_API_KEY',
+'Content-Type: application/json'
+]);
+$response = curl_exec($ch);
+curl_close($ch);
+echo $response;
+```
+
+## Support
+
+- **Email**: support@mifumolabs.com
+- **Base URL**: https://mifumosms.mifumolabs.com
 
 **Request Headers:**
 ```
